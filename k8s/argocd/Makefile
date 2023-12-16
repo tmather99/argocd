@@ -188,14 +188,14 @@ argocd-undeploy-apps: \
 
 #	argocd-deploy-redis
 #	argocd-deploy-rabbitmq
-argocd-deploy: use-context-argocd \
+argocd-deploy: \
 	argocd-deploy-dapr \
 	argocd-deploy-utils \
 	argocd-deploy-apps
 
 #	argocd-undeploy-redis
 #	argocd-undeploy-rabbitmq
-argocd-undeploy: use-context-argocd \
+argocd-undeploy: \
 	argocd-undeploy-dapr \
 	argocd-undeploy-utils \
 	argocd-undeploy-apps
@@ -276,7 +276,7 @@ argocd-deploy-kube-state-metrics:
 argocd-undeploy-kube-state-metrics:
 	-kubectl delete app -n argocd kube-state-metrics-$(ENV)-$(PROJ)
 
-argocd-deploy-observability: use-context-argocd \
+argocd-deploy-observability: \
 	argocd-deploy-otel-collector \
 	argocd-deploy-kube-state-metrics \
 	argocd-deploy-cadvisor \
@@ -285,7 +285,7 @@ argocd-deploy-observability: use-context-argocd \
 	argocd-deploy-loki \
 	argocd-deploy-tempo
 
-argocd-undeploy-observability: use-context-argocd \
+argocd-undeploy-observability: \
 	argocd-undeploy-otel-collector \
 	argocd-undeploy-kube-state-metrics \
 	argocd-undeploy-cadvisor \
