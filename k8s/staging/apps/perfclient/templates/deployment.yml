@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appId }}-app
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.appId }}-app
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appId }}-app
+    spec:      
+      containers:
+      - name: {{ .Values.appId }}
+        image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+        command: ["/bin/sh"]
+        args: ["-c", "while sleep 0.01; do curl --head http://perfdevice-service/enrolldevice; done"]
+        restartPolicy: OnFailure
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: {{ .Values.memory }}
+            cpu: {{ .Values.cpu }}
+

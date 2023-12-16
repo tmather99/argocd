@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-staging-iris
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: iris
+  source:
+    repoURL: 'https://prometheus-community.github.io/helm-charts'
+    targetRevision: 25.8.0
+    chart: prometheus
+    helm:
+      releaseName: dapr-prom
+      values: |-
+        extraScrapeConfigs: |
+          - job_name: 'ingress-nginx'
+            scrape_interval: 10s
+            static_configs:
+              - targets: ['ingress-nginx-nginx-ingress-controller-metrics.ingress-nginx.svc.cluster.local:9913']
+          - job_name: 'rabbitmq'
+            scrape_interval: 10s
+            static_configs:
+              - targets: ['rabbitmq.default.svc.cluster.local:9419']
+          - job_name: aggregated-trace-metrics
+            static_configs:
+              - targets:
+                  - otel-collector.default.svc.cluster.local:8889
+          - job_name: services
+            static_configs:
+              - targets:
+                  - anchorservice-service.default.svc.cluster.local:80
+                  - enrollmentservice-service.default.svc.cluster.local:80
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-iris.ap-northeast-1.eksctl.io'
+    namespace: observability
+  syncPolicy:
+    syncOptions:
+    - CreatNamespace=true
+    automated:
+      selfHeal: true

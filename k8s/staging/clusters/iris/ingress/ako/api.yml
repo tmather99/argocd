@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: imagegallery-api-ingress  
+  annotations:
+    passthrough.ako.vmware.com/enabled: "true"
+spec:
+  ingressClassName: avi-ingress-class
+  tls:
+  - hosts:
+      - api.assistdevtest.com
+    secretName: api-assistdevtest-tls   
+  rules:
+  - host: api.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: imagegallery-api-service
+            port: 
+              number: 443  

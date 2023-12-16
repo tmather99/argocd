@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: assistdevtest-com-tls
+  namespace: default
+spec:
+  secretName: assistdevtest-com-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - seq-staging-idp-asterix.assistdevtest.com
+  - sqlpad-staging-idp-asterix.assistdevtest.com
+  - redis-staging-idp-asterix.assistdevtest.com
+  - anchorservice-staging-idp-asterix.assistdevtest.com
+  - enrollmentservice-staging-idp-asterix.assistdevtest.com

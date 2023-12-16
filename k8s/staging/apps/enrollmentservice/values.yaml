@@ -1,0 +1,10 @@
+appId: enrollmentservice
+port: 80
+memory: "2048Mi"
+cpu: "1024m"  
+replicas: 3
+configmap:
+  name: enrollmentservice-configmap-v1
+image:
+  name: projects.registry.vmware.com/jedi/enrollmentservice
+  tag: v231201_0002

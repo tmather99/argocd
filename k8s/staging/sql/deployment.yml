@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mssql-app
+spec:
+  selector:
+    matchLabels:
+      app: mssql-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mssql-app
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mssql
+          image: projects.registry.vmware.com/jedi/mssql:v231201_0002
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 1433
+          env:
+            - name: ACCEPT_EULA
+              value: "Y"
+            - name: SA_PASSWORD
+              value: "Assist@1"

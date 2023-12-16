@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: apps-ingress  
+spec:
+  ingressClassName: avi-ingress-class
+  tls:
+  - hosts:
+      - anchorservice-staging-yellow.assistdevtest.com
+    secretName: assistdevtest-com-tls
+  - hosts:
+      - enrollmentservice-staging-yellow.assistdevtest.com
+    secretName: assistdevtest-com-tls   
+  rules:
+  - host: anchorservice-staging-yellow.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: anchorservice-service
+            port: 
+              number: 80  
+  - host: enrollmentservice-staging-yellow.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: enrollmentservice-service
+            port: 
+              number: 80  

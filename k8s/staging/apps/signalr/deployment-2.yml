@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: signalr-2-app
+spec:
+  selector:
+    matchLabels:
+      app: signalr-2-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: signalr-2-app
+    spec:
+      containers:
+        - name: signalr-2
+          image: projects.registry.vmware.com/jedi/signalr:v1004
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3            
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+            - name: ASPNETCORE_URLS
+              value: "http://+:80"
+            - name: SEQ_ENDPOINT
+              value: http://seq-service        

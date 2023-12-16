@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appId }}-app
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.appId }}-app
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appId }}-app
+    spec:      
+      containers:
+      - name: {{ .Values.appId }}
+        image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        - containerPort: 9464
+        resources:
+          limits:
+            memory: {{ .Values.memory }}
+            cpu: {{ .Values.cpu }}
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"        
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: SEQ_ENDPOINT
+          value: http://seq-service.default.svc.cluster.local        
+        - name: ANCHOR_URL
+          value: {{ .Values.anchorUrl }}
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: http://otel-collector.observability.svc.cluster.local:4317
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: grpc

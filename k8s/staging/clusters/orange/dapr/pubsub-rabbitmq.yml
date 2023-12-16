@@ -1,0 +1,28 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: pubsub
+spec:
+  type: pubsub.rabbitmq
+  version: v1
+  metadata:
+  - name: connectionString
+    value: "amqps://user:bitnami@b-53318b6f-bf3f-4868-9525-435bb904e3a8.mq.ap-northeast-1.amazonaws.com:5671"
+  - name: protocol
+    value: amqps  
+  - name: hostname
+    value: rabbitmq 
+  - name: username
+    value: user
+  - name: password
+    value: bitnami
+  - name: durable
+    value: "false"
+  - name: deletedWhenUnused
+    value: "false"
+  - name: autoAck
+    value: "false"
+  - name: reconnectWait
+    value: "0"
+  - name: concurrency
+    value: parallel

@@ -1,0 +1,12 @@
+appId: perfdevice
+port: 80
+memory: "512Mi"
+cpu: "512m"  
+replicas: 3
+# anchorUrl: https://perfdevice-staging-purple.assistdevtest.com
+anchorUrl: http://anchorservice-service
+configmap:
+  name: perfdevice-configmap-v1
+image:
+  name: projects.registry.vmware.com/jedi/perfdevice
+  tag: v231201_0002

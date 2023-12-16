@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dapr-dashboard-staging-idp
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: idp
+  source:
+    repoURL: 'https://dapr.github.io/helm-charts/'
+    targetRevision: 0.13.0
+    chart: dapr-dashboard
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-idp.ap-northeast-1.eksctl.io'
+    namespace: dapr-system
+  syncPolicy:
+    syncOptions:  
+    - CreatNamespace=true
+    automated:
+      selfHeal: true

@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: dapr-system-tls
+  namespace: dapr-system
+spec:
+  secretName: dapr-system-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - dapr-staging-iris.assistdevtest.com

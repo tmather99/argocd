@@ -1,0 +1,7 @@
+appId: perfclient
+memory: "32Mi"
+cpu: "100m"  
+replicas: 5
+image:
+  name: curlimages/curl
+  tag: latest

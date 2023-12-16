@@ -1,0 +1,10 @@
+appId: anchorservice
+port: 80
+memory: "2048Mi"
+cpu: "1024m"  
+replicas: 5
+configmap:
+  name: anchorservice-configmap-v1
+image:
+  name: projects.registry.vmware.com/jedi/anchorservice
+  tag: v231201_0002

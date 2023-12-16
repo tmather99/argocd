@@ -1,0 +1,55 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: imagegallery-ingress  
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - idp.assistdevtest.com
+    secretName: imagegallery-assistdevtest-tls   
+  - hosts:
+      - api.assistdevtest.com
+    secretName: imagegallery-assistdevtest-tls   
+  - hosts:
+      - client.assistdevtest.com
+    secretName: imagegallery-assistdevtest-tls   
+  - hosts:
+      - sqlpad.assistdevtest.com
+    secretName: imagegallery-assistdevtest-tls   
+  rules:
+  - host: idp.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: imagegallery-idp-service
+            port: 
+              number: 443  
+  - host: api.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: imagegallery-api-service
+            port: 
+              number: 443  
+  - host: client.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: imagegallery-client-service
+            port: 
+              number: 443  

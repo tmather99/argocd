@@ -1,0 +1,76 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-staging-green
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: green
+  source:
+    repoURL: 'https://grafana.github.io/helm-charts'
+    targetRevision: 7.0.8
+    chart: grafana
+    helm:
+      releaseName: dapr-grafana
+      parameters:
+        - name: adminPassword
+          value: 'Assist@1'
+      values: |-
+        persistence:
+          enabled: true
+          # storageClassName: default
+          accessModes:
+            - ReadWriteOnce
+          size: 2Gi
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+              - name: Dapr
+                type: prometheus
+                uid: prometheus
+                access: proxy
+                url: http://dapr-prom-prometheus-server.observability
+                jsonData:
+                  timeInterval: 10s
+                basicAuth: false
+                isDefault: true
+                version: 1
+                editable: true
+
+              - name: Tempo
+                type: tempo
+                uid: tempo
+                access: proxy
+                url: http://tempo.observability:3100
+                basicAuth: false
+                isDefault: false
+                version: 1
+                editable: true
+
+              - name: Loki
+                type: loki
+                uid: loki
+                access: proxy
+                url: http://loki-gateway.observability.svc.cluster.local
+                basicAuth: false
+                isDefault: false
+                version: 1
+                editable: true
+                jsonData:
+                  derivedFields:
+                    - datasourceUid: tempo
+                      matcherRegex: "\u0022traceid\u0022:\u0022(\\w+)\u0022"
+                      name: TraceId
+                      url: '$${__value.raw}'
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-green.ap-northeast-1.eksctl.io'
+    namespace: observability
+  syncPolicy:
+    syncOptions:
+    - CreatNamespace=true
+    automated:
+      selfHeal: true

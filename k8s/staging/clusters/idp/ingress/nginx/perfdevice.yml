@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: perfdevice-ingress  
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - perfdevice-staging-idp.assistdevtest.com
+    secretName: perfdevice-assistdevtest-tls
+  rules:
+  - host: perfdevice-staging-idp.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: perfdevice-service
+            port: 
+              number: 80  

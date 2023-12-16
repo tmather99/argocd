@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: enrollmentservice-staging-idp-asterix
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: idp-asterix
+  source:
+    repoURL: 'projects.registry.vmware.com/jedi'
+    targetRevision: 0.12.02
+    chart: enrollmentservice
+    helm:
+      passCredentials: true
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-idp-asterix.ap-northeast-1.eksctl.io'
+    namespace: default
+  syncPolicy:
+    syncOptions:
+    - CreatNamespace=true
+    automated:
+      selfHeal: true

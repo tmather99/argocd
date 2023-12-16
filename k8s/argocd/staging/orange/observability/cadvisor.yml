@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cadvisor-staging-orange
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: orange
+  source:
+    repoURL: 'https://ckotzbauer.github.io/helm-charts'
+    targetRevision: 2.3.1
+    chart: cadvisor
+    helm:
+      releaseName: cadvisor
+      values: |-
+        replicas: 1
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-orange.ap-northeast-1.eksctl.io'
+    namespace: observability
+  syncPolicy:
+    syncOptions:
+    - CreatNamespace=true
+    automated:
+      selfHeal: true

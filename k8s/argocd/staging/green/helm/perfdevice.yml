@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: perfdevice-staging-green
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: green
+  source:
+    repoURL: 'projects.registry.vmware.com/jedi'
+    targetRevision: 0.12.02
+    chart: perfdevice
+    helm:
+      passCredentials: true
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-green.ap-northeast-1.eksctl.io'
+    namespace: default
+  syncPolicy:
+    syncOptions:
+    - CreatNamespace=true
+    automated:
+      selfHeal: true

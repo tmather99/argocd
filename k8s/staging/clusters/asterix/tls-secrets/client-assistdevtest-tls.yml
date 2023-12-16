@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: client-assistdevtest-tls
+  namespace: default
+spec:
+  secretName: client-assistdevtest-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - client.assistdevtest.com

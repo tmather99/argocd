@@ -1,0 +1,35 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: jedi-staging-idp-asterix
+  region: ap-northeast-1
+  version: "1.28"
+ 
+vpc:
+  id: vpc-024ffa78034e61c48
+  subnets:
+    private:
+      ap-northeast-1a:
+        id: subnet-0c91aae21ece2a221
+      ap-northeast-1c:
+        id: subnet-090ec61c36cd99d47
+
+iam:
+  withOIDC: true
+ 
+addons:
+- name: aws-ebs-csi-driver
+  version: v1.23.0-eksbuild.1
+  attachPolicyARNs:
+  - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+ 
+managedNodeGroups:
+  - name: managed-ng-jedi-staging-idp-asterix
+    instanceType: m6a.xlarge
+    privateNetworking: true
+    minSize: 5
+    maxSize: 5
+    desiredCapacity: 5
+    volumeSize: 80
+    ssh:
+      allow: true

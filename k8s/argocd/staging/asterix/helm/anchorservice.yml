@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: anchorservice-staging-asterix
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: asterix
+  source:
+    repoURL: 'projects.registry.vmware.com/jedi'
+    targetRevision: 0.12.02
+    chart: anchorservice
+    helm:
+      passCredentials: true
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-asterix.ap-northeast-1.eksctl.io'
+    namespace: default
+  syncPolicy:
+    syncOptions:
+    - CreatNamespace=true
+    automated:
+      selfHeal: true
