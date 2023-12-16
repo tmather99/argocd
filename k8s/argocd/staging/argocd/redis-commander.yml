@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: redis-commander-staging-asterix
+  name: redis-commander-staging-argocd
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
   labels:
     ENV: staging
 spec:
-  project: asterix
+  project: argocd
   source:
-    repoURL: 'ssh://git@stash.air-watch.com:7999/aplnt/argocd.git'
-    path: k8s/staging/clusters/asterix/redis-commander
+    repoURL: 'https://github.com/tmather99/argocd.git'
+    path: k8s/staging/clusters/argocd/redis-commander
     targetRevision: main
     directory:
       recurse: true    
   destination:
-    name: 'cloudgate@tmather@jedi-staging-asterix.ap-northeast-1.eksctl.io'
+    name: 'cloudgate@tmather@jedi-staging-argocd.ap-northeast-1.eksctl.io'
     namespace: default
   syncPolicy:
     syncOptions:

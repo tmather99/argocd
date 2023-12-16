@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki-staging-asterix
+  name: loki-staging-argocd
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
   labels:
     ENV: staging
 spec:
-  project: asterix
+  project: argocd
   source:
     repoURL: 'https://grafana.github.io/helm-charts'
     targetRevision: 5.38.0
@@ -25,7 +25,7 @@ spec:
         minio:
             enabled: true
   destination:
-    name: 'cloudgate@tmather@jedi-staging-asterix.ap-northeast-1.eksctl.io'
+    name: 'cloudgate@tmather@jedi-staging-argocd.ap-northeast-1.eksctl.io'
     namespace: observability
   syncPolicy:
     syncOptions:

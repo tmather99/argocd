@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus-staging-asterix
+  name: prometheus-staging-argocd
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
   labels:
     ENV: staging
 spec:
-  project: asterix
+  project: argocd
   source:
     repoURL: 'https://prometheus-community.github.io/helm-charts'
     targetRevision: 25.8.0
@@ -35,7 +35,7 @@ spec:
                   - anchorservice-service.default.svc.cluster.local:80
                   - enrollmentservice-service.default.svc.cluster.local:80
   destination:
-    name: 'cloudgate@tmather@jedi-staging-asterix.ap-northeast-1.eksctl.io'
+    name: 'cloudgate@tmather@jedi-staging-argocd.ap-northeast-1.eksctl.io'
     namespace: observability
   syncPolicy:
     syncOptions:

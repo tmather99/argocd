@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cadvisor-staging-asterix
+  name: cadvisor-staging-argocd
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
   labels:
     ENV: staging
 spec:
-  project: asterix
+  project: argocd
   source:
     repoURL: 'https://ckotzbauer.github.io/helm-charts'
     targetRevision: 2.3.1
@@ -18,7 +18,7 @@ spec:
       values: |-
         replicas: 1
   destination:
-    name: 'cloudgate@tmather@jedi-staging-asterix.ap-northeast-1.eksctl.io'
+    name: 'cloudgate@tmather@jedi-staging-argocd.ap-northeast-1.eksctl.io'
     namespace: observability
   syncPolicy:
     syncOptions:

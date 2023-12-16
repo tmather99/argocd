@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: perfdevice-staging-asterix
+  name: perfdevice-staging-argocd
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
   labels:
     ENV: staging
 spec:
-  project: asterix
+  project: argocd
   source:
     repoURL: 'projects.registry.vmware.com/jedi'
     targetRevision: 0.12.02
@@ -16,7 +16,7 @@ spec:
     helm:
       passCredentials: true
   destination:
-    name: 'cloudgate@tmather@jedi-staging-asterix.ap-northeast-1.eksctl.io'
+    name: 'cloudgate@tmather@jedi-staging-argocd.ap-northeast-1.eksctl.io'
     namespace: default
   syncPolicy:
     syncOptions:
