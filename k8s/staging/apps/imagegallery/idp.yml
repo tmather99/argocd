@@ -25,7 +25,7 @@ spec:
           secretName: assistdevtest-com-pfx
       containers:
       - name: imagegallery-idp
-        image: tmather99/imagegallery-idp:v8
+        image: tmather99/imagegallery-idp:v9
         volumeMounts:
         - name: pfx-volume
           mountPath: /https
