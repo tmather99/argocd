@@ -33,6 +33,6 @@ spec:
         - name: ANCHOR_URL
           value: {{ .Values.anchorUrl }}
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: http://otel-collector.observability.svc.cluster.local:4317
+          value: http://otel-collector-service.observability.svc.cluster.local:4317
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
           value: grpc
