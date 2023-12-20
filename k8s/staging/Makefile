@@ -54,6 +54,7 @@ secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/argocd-server-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/observability-tls.yml
+	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/otel-collector-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/assistdevtest-com-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/signalr-assistdevtest-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/perfdevice-assistdevtest-tls.yml
@@ -62,6 +63,7 @@ rm-secrets:
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/argocd-server-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/observability-tls.yml
+	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/otel-collector-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/assistdevtest-com-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/signalr-assistdevtest-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/perfdevice-assistdevtest-tls.yml
