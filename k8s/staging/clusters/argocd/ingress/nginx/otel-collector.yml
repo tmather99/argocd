@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: otel-collector-ingress  
+  namespace: observability
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - otel-collector-staging-argocd.assistdevtest.com
+      secretName: observability-tls
+  rules:
+    - host: otel-collector-staging-argocd.assistdevtest.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: otel-collector-service
+                port:
+                  number: 4317

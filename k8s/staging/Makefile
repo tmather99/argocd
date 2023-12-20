@@ -528,6 +528,7 @@ CNAMES = \
 	prometheus \
 	cadvisor \
 	kube-state-metrics \
+	otel-collector \
 	anchorservice \
 	enrollmentservice \
 	perfdevice \
