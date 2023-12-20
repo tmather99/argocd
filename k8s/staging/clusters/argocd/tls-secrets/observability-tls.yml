@@ -13,3 +13,4 @@ spec:
   - prometheus-staging-argocd.assistdevtest.com
   - cadvisor-staging-argocd.assistdevtest.com
   - kube-state-metrics-staging-argocd.assistdevtest.com
+  - otel-collector-staging-argocd.assistdevtest.com

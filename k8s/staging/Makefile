@@ -197,9 +197,16 @@ argocd-ingress:
 rm-argocd-ingress:	
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/argocd.yml
 
+otel-collector-ingress:	
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-collector.yml
+
+rm-otel-collector-ingress:	
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-collector.yml
+
 ingress: dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/argocd.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/grafana.yml
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-collector.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/utils.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/apps.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/perfdevice.yml
@@ -208,6 +215,7 @@ ingress: dapr-dashboard-ingress
 rm-ingress: rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/argocd.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/grafana.yml
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-collector.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/utils.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/apps.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/perfdevice.yml

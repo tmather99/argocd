@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: otel-collector-ingress  
+  namespace: observability
+  annotations:
+    passthrough.ako.vmware.com/enabled: "true"
+spec:
+  ingressClassName: avi-ingress-class
+  tls:
+  - hosts:
+      - otel-collector-staging-argocd.assistdevtest.com
+    secretName: observability-tls
+  rules:
+  - host: otel-collector-staging-argocd.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: otel-collector-service
+            port: 
+              number: 4317
