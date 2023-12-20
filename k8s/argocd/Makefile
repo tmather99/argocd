@@ -1,6 +1,6 @@
 include ../../Makefile
 
-GIT_REPO = ssh://git@stash.air-watch.com:7999/aplnt/argocd.git
+GIT_REPO = https://github.com/tmather99/argocd.git
 
 CERT_TLS     = assistdevtest-tls.yml
 CERT_PFX     = assistdevtest-com.pfx
@@ -103,7 +103,7 @@ argocd-add-cluster:
 	argocd cluster add cloudgate@tmather@jedi-$(ENV)-$(PROJ).$(REGION).eksctl.io --grpc-web
 
 argocd-connect-repo:
-	argocd repo add $(GIT_REPO) --insecure-ignore-host-key --ssh-private-key-path ~/.ssh/id_ed25519
+	argocd repo add $(GIT_REPO) --insecure-ignore-host-key
 
 argocd-add-oci-repo:
 	argocd repo add projects.registry.vmware.com:443/jedi --type helm --name oci-repo --enable-oci
