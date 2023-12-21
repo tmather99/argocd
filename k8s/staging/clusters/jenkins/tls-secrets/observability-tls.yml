@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: observability-tls
+  namespace: observability
+spec:
+  secretName: observability-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - grafana-staging-jenkins.assistdevtest.com
+  - prometheus-staging-jenkins.assistdevtest.com
+  - cadvisor-staging-jenkins.assistdevtest.com
+  - kube-state-metrics-staging-jenkins.assistdevtest.com

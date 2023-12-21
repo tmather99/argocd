@@ -39,7 +39,7 @@ helm-repos:
 cert-manager:
 	helm install cert-manager jetstack/cert-manager \
 		-n cert-manager --create-namespace \
-		--version v1.12.7 --set installCRDs=true
+		--version v1.13.3 --set installCRDs=true
 
 rm-cert-manager:
 	helm delete cert-manager -n cert-manager

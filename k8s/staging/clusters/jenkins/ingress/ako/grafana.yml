@@ -1,0 +1,61 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: observability
+spec:
+  ingressClassName: avi-ingress-class
+  tls:
+    - hosts:
+        - prometheus-staging-jenkins.assistdevtest.com
+      secretName: observability-tls
+    - hosts:
+        - grafana-staging-jenkins.assistdevtest.com
+      secretName: observability-tls
+    - hosts:
+        - cadvisor-staging-jenkins.assistdevtest.com
+      secretName: observability-tls
+    - hosts:
+        - kube-state-metrics-staging-jenkins.assistdevtest.com
+      secretName: observability-tls
+  rules:
+    - host: prometheus-staging-jenkins.assistdevtest.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: dapr-prom-prometheus-server
+                port:
+                  number: 80
+    - host: grafana-staging-jenkins.assistdevtest.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: dapr-grafana
+                port:
+                  number: 80               
+    - host: cadvisor-staging-jenkins.assistdevtest.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: cadvisor
+                port:
+                  number: 8080                  
+    - host: kube-state-metrics-staging-jenkins.assistdevtest.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: kube-state-metrics
+                port:
+                  number: 8080                                    
