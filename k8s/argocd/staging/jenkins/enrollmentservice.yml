@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: enrollmentservice-staging-argocd
+  name: enrollmentservice-staging-jenkins
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dapr-dashboard-staging-argocd
+  name: dapr-dashboard-staging-jenkins
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  

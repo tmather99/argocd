@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cadvisor-staging-argocd
+  name: cadvisor-staging-jenkins
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  

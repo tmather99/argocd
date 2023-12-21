@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: perfdevice-staging-argocd
+  name: perfdevice-staging-jenkins
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  

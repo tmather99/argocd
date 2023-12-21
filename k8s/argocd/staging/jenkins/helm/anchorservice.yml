@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: anchorservice-staging-argocd
+  name: anchorservice-staging-jenkins
   namespace: argocd
   finalizers:
     - resources-finalizer.jenkins.argoproj.io  

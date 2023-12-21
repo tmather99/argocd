@@ -30,6 +30,8 @@ else ifeq ($(PROJ),idp-asterix)
 REGION = ap-northeast-1
 else ifeq ($(PROJ),argocd)
 REGION = ap-northeast-1
+else ifeq ($(PROJ),jenkins)
+REGION = ap-northeast-1
 else
 REGION = ap-northeast-1
 endif

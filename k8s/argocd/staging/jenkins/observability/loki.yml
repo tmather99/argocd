@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki-staging-argocd
+  name: loki-staging-jenkins
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
