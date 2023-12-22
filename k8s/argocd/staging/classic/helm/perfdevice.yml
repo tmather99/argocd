@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: enrollmentservice-staging-jenkins
+  name: perfdevice-staging-classic
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
   labels:
     ENV: staging
 spec:
-  project: jenkins
+  project: classic
   source:
     repoURL: 'projects.registry.vmware.com/jedi'
     targetRevision: 0.12.02
-    chart: enrollmentservice
+    chart: perfdevice
     helm:
       passCredentials: true
   destination:
-    name: 'cloudgate@tmather@jedi-staging-jenkins.ap-northeast-1.eksctl.io'
+    name: 'cloudgate@tmather@jedi-staging-classic.ap-northeast-1.eksctl.io'
     namespace: default
   syncPolicy:
     syncOptions:
