@@ -149,6 +149,26 @@ argocd-undeploy-utils: \
 	argocd-undeploy-seq \
 	argocd-undeploy-redis-commander
 
+argocd-deploy-gru:
+	kubectl apply -f $(ENV)/$(PROJ)/testbed/gru.yml
+
+argocd-undeploy-gru:
+	-kubectl delete app -n argocd gru-$(ENV)-$(PROJ)
+
+argocd-deploy-macminion:
+	kubectl apply -f $(ENV)/$(PROJ)/testbed/macminion.yml
+
+argocd-undeploy-macminion:
+	-kubectl delete app -n argocd macminion-$(ENV)-$(PROJ)
+
+argocd-deploy-testbed: \
+	argocd-deploy-gru \
+	argocd-deploy-macminion
+
+argocd-undeploy-testbed: \
+	argocd-undeploy-gru \
+	argocd-undeploy-macminion
+
 #
 # Argocd apps targets
 #
