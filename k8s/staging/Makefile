@@ -90,6 +90,14 @@ pfx-passwords:
 rm-pfx-passwords:
 	kubectl delete secret pfx-password
 
+pfx: \
+	assistdevtest-com-pfx \
+	pfx-passwords
+
+rm-pfx: \
+	rm-assistdevtest-com-pfx \
+	rm-pfx-passwords
+
 #
 # Sealed Secrets
 #
