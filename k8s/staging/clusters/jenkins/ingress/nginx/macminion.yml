@@ -1,27 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: testbed-ingress  
+  name: macminion-ingress  
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
-      - gru-staging-jenkins.assistdevtest.com
-    secretName: testbed-tls   
-  - hosts:
       - macminion-staging-jenkins.assistdevtest.com
-    secretName: testbed-tls   
+    secretName: macminion-tls   
   rules:
-  - host: gru-staging-jenkins.assistdevtest.com
-    http:
-      paths:      
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: gru-service
-            port: 
-              number: 80  
   - host: macminion-staging-jenkins.assistdevtest.com
     http:
       paths:      

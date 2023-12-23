@@ -58,7 +58,8 @@ secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/assistdevtest-com-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/signalr-assistdevtest-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/perfdevice-assistdevtest-tls.yml
-	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/testbed-tls.yml
+	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/gru-tls.yml
+	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
  
 rm-secrets: 
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/argocd-server-tls.yml
@@ -68,7 +69,8 @@ rm-secrets:
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/assistdevtest-com-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/signalr-assistdevtest-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/perfdevice-assistdevtest-tls.yml
-	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/testbed-tls.yml
+	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/gru-tls.yml
+	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 
 #
 # ASPNETCORE_Kestrel__Certificates__Default
@@ -177,11 +179,17 @@ client-ingress:
 rm-client-ingress:
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/client.yml
 
-testbed-ingress:
-	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/testbed.yml
+gru-ingress:
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
 
-rm-testbed-ingress:
-	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/testbed.yml
+rm-gru-ingress:
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
+
+macminion-ingress:
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
+
+rm-macminion-ingress:
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 
 dapr-dashboard-ingress:
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/dapr-dashboard.yml
@@ -221,7 +229,8 @@ ingress: dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/apps.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/perfdevice.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/signalr.yml
-	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/testbed.yml
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 
 rm-ingress: rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/argocd.yml
@@ -231,7 +240,8 @@ rm-ingress: rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/apps.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/perfdevice.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/signalr.yml
-	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/testbed.yml
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 
 # 
 # utils targets
@@ -364,6 +374,29 @@ rm-apps: \
 	rm-anchorservice \
 	rm-enrollmentservice \
 	rm-perfdevice
+
+#
+# ImageGallery targets
+#
+gru:
+	kubectl apply -f ./apps/testbed/gru
+
+rm-gru:
+	-kubectl delete -f ./apps/testbed/gru
+
+macminion:
+	kubectl apply -f ./apps/testbed/macminion
+
+rm-macminion:
+	-kubectl delete -f ./apps/testbed/macminion
+
+testbed: \
+	gru \
+	macminion
+
+rm-testbed: \
+	rm-gru \
+	rm-macminion
 
 #
 # ImageGallery targets
@@ -544,6 +577,8 @@ CNAMES = \
 	anchorservice \
 	enrollmentservice \
 	perfdevice \
+	gru \
+	macminion \
 	signalr \
 	signalr-1 \
 	signalr-2

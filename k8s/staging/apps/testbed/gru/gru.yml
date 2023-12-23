@@ -14,7 +14,7 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "gru"
-        dapr.io/app-port: "443"
+        dapr.io/app-port: "8081"
         dapr.io/app-ssl: "true"
         dapr.io/config: "tracing"
         dapr.io/enable-metrics: "true"
@@ -26,22 +26,28 @@ spec:
           secretName: assistdevtest-com-pfx
       containers:
       - name: gru
-        image: projects.registry.vmware.com/jedi/gru:v231201_0002
+        image: projects.registry.vmware.com/jedi/gru:v231225_0001
         volumeMounts:
         - name: pfx-volume
           mountPath: /https
         ports:
-        - containerPort: 80
+        - containerPort: 8081
         resources:
           limits:
             memory: "128Mi"
             cpu: "200m"  
         imagePullPolicy: Always
         env:
-        - name: SEQ_SERVER_URL
-          value: "http://seq-service"        
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"        
         - name: ASPNETCORE_URLS
-          value: "https://+:443"        
+          value: "https://+:8081"        
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: http://otel-collector-service.observability.svc.cluster.local:4317
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: grpc
+        - name: SEQ_SERVER_URL
+          value: http://seq-service.default.svc.cluster.local        
         - name: ASPNETCORE_Kestrel__Certificates__Default__Path
           value: "/https/assistdevtest-com.pfx"        
         - name: ASPNETCORE_Kestrel__Certificates__Default__Password
@@ -64,5 +70,5 @@ spec:
   ports:
     - protocol: TCP 
       port: 443
-      targetPort: 443
+      targetPort: 8081
   type: ClusterIP
