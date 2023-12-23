@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki-staging-testbed
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: testbed
+  source:
+    repoURL: 'https://grafana.github.io/helm-charts'
+    targetRevision: 5.38.0
+    chart: loki
+    helm:
+      releaseName: loki
+      values: |-
+        loki:
+          auth_enabled: false
+          commonConfig:
+            replication_factor: 1
+        singleBinary:
+          replicas: 1
+        minio:
+            enabled: true
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-testbed.ap-northeast-1.eksctl.io'
+    namespace: observability
+  syncPolicy:
+    syncOptions:
+    - CreatNamespace=true
+    - Replace=true    
+    automated:
+      selfHeal: true

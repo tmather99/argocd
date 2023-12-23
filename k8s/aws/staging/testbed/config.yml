@@ -1,0 +1,40 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: jedi-staging-testbed
+  region: ap-northeast-1
+  version: "1.28"
+ 
+vpc:
+  id: vpc-07b7080ea48fd79fc
+  subnets:
+    private:
+      ap-northeast-1a:
+        id: subnet-0cc7ee1b03b1dcdf3
+      ap-northeast-1c:
+        id: subnet-0d48e25ac5ae36a5f
+    public:
+      ap-northeast-1a:
+        id: subnet-07f4c87da8bc213ee
+      ap-northeast-1c:
+        id: subnet-075dfda1bc393d878
+
+iam:
+  withOIDC: true
+ 
+addons:
+- name: aws-ebs-csi-driver
+  version: v1.25.0-eksbuild.1
+  attachPolicyARNs:
+  - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+ 
+managedNodeGroups:
+  - name: managed-ng-jedi-staging-testbed
+    instanceType: m6a.xlarge
+    privateNetworking: true
+    minSize: 5
+    maxSize: 5
+    desiredCapacity: 5
+    volumeSize: 100
+    ssh:
+      allow: true

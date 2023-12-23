@@ -1,0 +1,62 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: utils-ingress 
+  annotations:
+    cert-manager.io/issuer: "letsencrypt"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - seq-staging-testbed.assistdevtest.com
+    secretName: assistdevtest-com-tls   
+  - hosts:
+      - redis-staging-testbed.assistdevtest.com
+    secretName: assistdevtest-com-tls   
+  - hosts:
+      - rabbitmq-staging-testbed.assistdevtest.com
+    secretName: assistdevtest-com-tls   
+  - hosts:
+      - sqlpad-staging-testbed.assistdevtest.com
+    secretName: assistdevtest-com-tls   
+  rules:
+  - host: seq-staging-testbed.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: seq-service
+            port: 
+              number: 80  
+  - host: redis-staging-testbed.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: redis-commander
+            port: 
+              number: 8081  
+  - host: rabbitmq-staging-testbed.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rabbitmq
+            port: 
+              number: 15672  
+  - host: sqlpad-staging-testbed.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sqlpad-service
+            port: 
+              number: 3000  

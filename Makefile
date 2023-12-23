@@ -1,7 +1,7 @@
 TAG             = v231201_0002
 HELM_VERSION    = 0.12.02
 ENV             = staging
-PROJ            = jenkins
+PROJ            = testbed
 REPO            = harbor-repo.vmware.com
 HARBOR_PROJ     = $(REPO)/jedi
 REPO_TAG        = projects.registry.vmware.com
@@ -33,6 +33,8 @@ REGION = ap-northeast-1
 else ifeq ($(PROJ),classic)
 REGION = ap-northeast-1
 else ifeq ($(PROJ),jenkins)
+REGION = ap-northeast-1
+else ifeq ($(PROJ),testbed)
 REGION = ap-northeast-1
 else
 REGION = ap-northeast-1
