@@ -17,7 +17,7 @@ rm-argocd-cluster:
 #
 # init targets
 #
-init: \
+init: use-context-argocd \
 	helm-repos \
 	nginx-kind \
 	metrics-server
