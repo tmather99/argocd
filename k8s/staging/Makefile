@@ -236,7 +236,6 @@ ingress: dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/utils.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/apps.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/perfdevice.yml
-	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/signalr.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 
@@ -247,7 +246,6 @@ rm-ingress: rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/utils.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/apps.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/perfdevice.yml
-	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/signalr.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 

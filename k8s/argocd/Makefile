@@ -167,11 +167,11 @@ argocd-deploy-macminion:
 argocd-undeploy-macminion:
 	-kubectl delete app -n argocd macminion-$(ENV)-$(PROJ)
 
-argocd-deploy-testbed: \
+argocd-deploy-testbed: use-context-argocd \
 	argocd-deploy-gru \
 	argocd-deploy-macminion
 
-argocd-undeploy-testbed: \
+argocd-undeploy-testbed: use-context-argocd\
 	argocd-undeploy-gru \
 	argocd-undeploy-macminion
 
@@ -202,12 +202,12 @@ argocd-deploy-signalr:
 argocd-undeploy-signalr:
 	-kubectl delete app -n argocd signalr-$(ENV)-$(PROJ)
 
-argocd-deploy-apps: \
+argocd-deploy-apps: use-context-argocd \
 	argocd-deploy-anchorservice \
 	argocd-deploy-enrollmentservice \
 	argocd-deploy-perfdevice \
 	
-argocd-undeploy-apps: \
+argocd-undeploy-apps: use-context-argocd \
 	argocd-undeploy-anchorservice \
 	argocd-undeploy-enrollmentservice \
 	argocd-undeploy-perfdevice
@@ -216,6 +216,7 @@ argocd-undeploy-apps: \
 #	argocd-deploy-rabbitmq
 argocd-deploy: use-context-argocd \
 	argocd-deploy-dapr \
+	argocd-deploy-dapr-dashboard \
 	argocd-deploy-utils \
 	argocd-deploy-apps
 
@@ -223,6 +224,7 @@ argocd-deploy: use-context-argocd \
 #	argocd-undeploy-rabbitmq
 argocd-undeploy: use-context-argocd \
 	argocd-undeploy-dapr \
+	argocd-undeploy-dapr-dashboard \
 	argocd-undeploy-utils \
 	argocd-undeploy-apps
 
