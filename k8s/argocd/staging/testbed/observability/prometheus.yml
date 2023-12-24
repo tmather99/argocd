@@ -28,10 +28,12 @@ spec:
           - job_name: aggregated-trace-metrics
             static_configs:
               - targets:
-                  - otel-collector.default.svc.cluster.local:8889
+                  - otel-collector-service.observability.svc.cluster.local:8889
           - job_name: services
             static_configs:
               - targets:
+                  - gru-service.default.svc.cluster.local:8080
+                  - macminion-service.default.svc.cluster.local:8080
                   - anchorservice-service.default.svc.cluster.local:80
                   - enrollmentservice-service.default.svc.cluster.local:80
   destination:
