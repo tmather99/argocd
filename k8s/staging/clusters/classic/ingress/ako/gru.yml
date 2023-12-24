@@ -3,12 +3,13 @@ kind: Ingress
 metadata:
   name: gru-ingress  
   annotations:
-    passthrough.ako.vmware.com/enabled: "true"
+    passthrough.ako.vmware.com/enabled: "false"
 spec:
   ingressClassName: avi-ingress-class
   tls:
   - hosts:
       - gru-staging-classic.assistdevtest.com
+    secretName: gru-tls   
   rules:
   - host: gru-staging-classic.assistdevtest.com
     http:
@@ -19,4 +20,4 @@ spec:
           service:
             name: gru-service
             port: 
-              number: 443  
+              name: https

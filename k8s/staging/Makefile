@@ -229,7 +229,7 @@ otel-collector-ingress:
 rm-otel-collector-ingress:	
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-collector.yml
 
-ingress: dapr-dashboard-ingress
+ingress: use-context dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/argocd.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/grafana.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-collector.yml
@@ -239,7 +239,7 @@ ingress: dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 
-rm-ingress: rm-dapr-dashboard-ingress
+rm-ingress: use-context rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/argocd.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/grafana.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-collector.yml
@@ -318,13 +318,13 @@ dapr-tenants-secrets:
 rm-dapr-tenants-secrets:
 	kubectl delete secret tenants-secrets
 
-dapr-configs: \
+dapr-configs: use-context \
  	dapr-statestore \
     dapr-pubsub-rabbitmq \
 	dapr-tenants-secrets \
 	dapr-tracing
 
-rm-dapr-configs: \
+rm-dapr-configs: use-context \
 	rm-dapr-statestore \
     rm-dapr-pubsub-rabbitmq \
 	rm-dapr-tenants-secrets \

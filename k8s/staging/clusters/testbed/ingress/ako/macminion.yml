@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: macminion-ingress  
   annotations:
-    passthrough.ako.vmware.com/enabled: "true"
+    passthrough.ako.vmware.com/enabled: "false"
 spec:
   ingressClassName: avi-ingress-class
   tls:
