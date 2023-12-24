@@ -9,7 +9,6 @@ spec:
   tls:
   - hosts:
       - gru-staging-jenkins.assistdevtest.com
-    secretName: gru-tls   
   rules:
   - host: gru-staging-jenkins.assistdevtest.com
     http:
@@ -20,4 +19,4 @@ spec:
           service:
             name: gru-service
             port: 
-              number: 443  
+              name: https

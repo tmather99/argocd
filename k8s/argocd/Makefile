@@ -71,6 +71,12 @@ rm-argocd-secrets:
 importpfx:
 	certutil -q -f -p "Assist@1" -enterprise -importpfx root ".\ingress\tls-secrets\certs\$(CERT_PFX)"
 
+argocd-ingress:
+	kubectl apply -f ingress/argocd.yml
+
+rm-argocd-ingress:
+	kubectl delete -f ingress/argocd.yml
+
 argocd-iris-ingress:
 	kubectl apply -f ingress/argocd-iris.yml
 
@@ -87,7 +93,7 @@ rm-argocd-asterix-ingress:
 # Argocd settings
 #
 argocd-login:
-	argocd login argocd-$(ENV)-$(PROJ).assistdevtest.com --username admin --password Assist@1 --grpc-web
+	argocd login argocd.assistdevtest.com --username admin --password Assist@1 --grpc-web
 
 argocd-iris-login:
 	argocd login argocd-iris.assistdevtest.com --username admin --password Assist@1 --grpc-web
@@ -208,14 +214,14 @@ argocd-undeploy-apps: \
 
 #	argocd-deploy-redis
 #	argocd-deploy-rabbitmq
-argocd-deploy: \
+argocd-deploy: use-context-argocd \
 	argocd-deploy-dapr \
 	argocd-deploy-utils \
 	argocd-deploy-apps
 
 #	argocd-undeploy-redis
 #	argocd-undeploy-rabbitmq
-argocd-undeploy: \
+argocd-undeploy: use-context-argocd \
 	argocd-undeploy-dapr \
 	argocd-undeploy-utils \
 	argocd-undeploy-apps
@@ -296,7 +302,7 @@ argocd-deploy-kube-state-metrics:
 argocd-undeploy-kube-state-metrics:
 	-kubectl delete app -n argocd kube-state-metrics-$(ENV)-$(PROJ)
 
-argocd-deploy-observability: \
+argocd-deploy-observability: use-context-argocd \
 	argocd-deploy-otel-collector \
 	argocd-deploy-kube-state-metrics \
 	argocd-deploy-cadvisor \
@@ -305,7 +311,7 @@ argocd-deploy-observability: \
 	argocd-deploy-loki \
 	argocd-deploy-tempo
 
-argocd-undeploy-observability: \
+argocd-undeploy-observability: use-context-argocd \
 	argocd-undeploy-otel-collector \
 	argocd-undeploy-kube-state-metrics \
 	argocd-undeploy-cadvisor \

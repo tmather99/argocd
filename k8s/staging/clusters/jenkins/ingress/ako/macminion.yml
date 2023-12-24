@@ -9,7 +9,6 @@ spec:
   tls:
   - hosts:
       - macminion-staging-jenkins.assistdevtest.com
-    secretName: macminion-tls   
   rules:
   - host: macminion-staging-jenkins.assistdevtest.com
     http:
@@ -20,4 +19,4 @@ spec:
           service:
             name: macminion-service
             port: 
-              number: 443  
+              name: https
