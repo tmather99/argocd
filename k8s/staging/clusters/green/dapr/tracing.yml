@@ -6,7 +6,7 @@ spec:
   tracing:
     samplingRate: "1"
     otel:
-      endpointAddress: "otel-collector.observability.svc.cluster.local:4317"
+      endpointAddress: "otel-collector-service.observability.svc.cluster.local:4317"
       protocol: grpc
       isSecure: false
   metric:
