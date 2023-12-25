@@ -396,11 +396,11 @@ macminion:
 rm-macminion:
 	-kubectl delete -f ./apps/testbed/macminion
 
-testbed: \
+testbed: use-context \
 	gru \
 	macminion
 
-rm-testbed: \
+rm-testbed: use-context \
 	rm-gru \
 	rm-macminion
 
@@ -480,7 +480,7 @@ rm-logs:
 		$(kubectl get pods -n observability -l operator.agent.grafana.com/type=logs \
 		--output jsonpath='{.items[0].metadata.name}') 
 
-rm-all-pods:
+rm-all-pods: use-context
 	kubectl delete --all pods -n observability --force
 
 # http://tempo.observability:3100
@@ -514,7 +514,7 @@ kube-state-metrics:
 rm-kube-state-metrics:
 	helm delete kube-state-metrics -n observability
 
-up: \
+up: use-context \
     dapr-install \
 	dapr-dashboard-install \
 	dapr-configs \
@@ -523,7 +523,7 @@ up: \
 	redis-commander \
 	apps 
 
-down: \
+down: use-context \
 	dapr-uninstall \
 	dapr-dashboard-uninstall \
     rm-dapr-configs \
@@ -532,7 +532,7 @@ down: \
 	rm-redis-commander \
 	rm-apps
 
-observability: \
+observability: use-context \
 	prometheus \
 	cadvisor \
 	kube-state-metrics \
@@ -541,7 +541,7 @@ observability: \
 	tempo \
 	loki
 
-rm-observability: \
+rm-observability: use-context \
 	rm-prometheus \
 	rm-cadvisor \
 	rm-kube-state-metrics \

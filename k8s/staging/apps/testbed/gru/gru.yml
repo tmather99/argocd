@@ -26,7 +26,7 @@ spec:
           secretName: assistdevtest-com-pfx
       containers:
       - name: gru
-        image: projects.registry.vmware.com/jedi/gru:v231225_0002
+        image: projects.registry.vmware.com/jedi/gru:v231225_0006
         volumeMounts:
         - name: pfx-volume
           mountPath: /https
@@ -43,7 +43,7 @@ spec:
         - name: ASPNETCORE_URLS
           value: "http://+:8080"        
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: http://otel-collector.observability.svc.cluster.local:4317
+          value: http://otel-collector-service.observability.svc.cluster.local:4317
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
           value: grpc
         - name: SEQ_SERVER_URL
