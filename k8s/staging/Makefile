@@ -514,6 +514,13 @@ kube-state-metrics:
 rm-kube-state-metrics:
 	helm delete kube-state-metrics -n observability
 
+blackbox-exporter:
+	helm upgrade --install blackbox prometheus-community/prometheus-blackbox-exporter \
+	 -n observability --create-namespace --values ./observability/blackbox/values.yml --wait
+
+rm-blackbox-exporter:
+	helm delete blackbox -n observability
+	
 up: use-context \
     dapr-install \
 	dapr-dashboard-install \

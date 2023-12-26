@@ -1,15 +1,4 @@
 extraScrapeConfigs: |
-  - job_name: 'ingress-nginx'
-    scrape_interval: 10s
-    static_configs:
-      - targets:
-          - ingress-nginx-nginx-ingress-controller-metrics.ingress-nginx.svc.cluster.local:10254
-
-  - job_name: 'rabbitmq'
-    static_configs:
-      - targets:
-          - rabbitmq.default.svc.cluster.local:9419
-
   - job_name: aggregated-trace-metrics
     static_configs:
       - targets:
@@ -18,8 +7,8 @@ extraScrapeConfigs: |
   - job_name: services
     static_configs:
       - targets:
-          - gru-service.default.svc.cluster.local:8080
-          - macminion-service.default.svc.cluster.local:8080
+          - gru-service.default.svc.cluster.local:80
+          - macminion-service.default.svc.cluster.local:80
           - anchorservice-service.default.svc.cluster.local:80
           - enrollmentservice-service.default.svc.cluster.local:80
           - cadvisor.observability.svc.cluster.local:8080

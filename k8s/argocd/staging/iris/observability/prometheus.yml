@@ -17,23 +17,19 @@ spec:
       releaseName: dapr-prom
       values: |-
         extraScrapeConfigs: |
-          - job_name: 'ingress-nginx'
-            scrape_interval: 10s
-            static_configs:
-              - targets: ['ingress-nginx-nginx-ingress-controller-metrics.ingress-nginx.svc.cluster.local:9913']
-          - job_name: 'rabbitmq'
-            scrape_interval: 10s
-            static_configs:
-              - targets: ['rabbitmq.default.svc.cluster.local:9419']
           - job_name: aggregated-trace-metrics
             static_configs:
               - targets:
-                  - otel-collector.default.svc.cluster.local:8889
+                  - otel-collector-service.observability.svc.cluster.local:8889
           - job_name: services
             static_configs:
               - targets:
+                  - gru-service.default.svc.cluster.local:80
+                  - macminion-service.default.svc.cluster.local:80
                   - anchorservice-service.default.svc.cluster.local:80
                   - enrollmentservice-service.default.svc.cluster.local:80
+                  - cadvisor.observability.svc.cluster.local:8080
+                  - kube-state-metrics.observability.svc.cluster.local:8080                 
   destination:
     name: 'cloudgate@tmather@jedi-staging-iris.ap-northeast-1.eksctl.io'
     namespace: observability
