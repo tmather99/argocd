@@ -385,16 +385,16 @@ rm-apps: \
 # ImageGallery targets
 #
 gru:
-	kubectl apply -f ./apps/testbed/gru
+	helm install gru apps/testbed/gru
 
 rm-gru:
-	-kubectl delete -f ./apps/testbed/gru
+	-helm delete gru
 
 macminion:
-	kubectl apply -f ./apps/testbed/macminion
+	helm install macminion apps/testbed/macminion
 
 rm-macminion:
-	-kubectl delete -f ./apps/testbed/macminion
+	-helm delete macminion
 
 testbed: use-context \
 	gru \
@@ -516,10 +516,10 @@ rm-kube-state-metrics:
 
 blackbox-exporter:
 	helm upgrade --install blackbox prometheus-community/prometheus-blackbox-exporter \
-	 -n observability --create-namespace --values ./observability/blackbox/values.yml --wait
+	 --values ./observability/blackbox/values.yml --wait
 
 rm-blackbox-exporter:
-	helm delete blackbox -n observability
+	helm delete blackbox
 	
 up: use-context \
     dapr-install \

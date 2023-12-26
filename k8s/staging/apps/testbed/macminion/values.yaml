@@ -1,0 +1,10 @@
+appId: macminion
+port: 80
+memory: "2048Mi"
+cpu: "1024m"  
+replicas: 1
+configmap:
+  name: macminion-configmap-v1
+image:
+  name: projects.registry.vmware.com/jedi/macminion
+  tag: v231225_0021
