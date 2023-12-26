@@ -26,7 +26,7 @@ spec:
           secretName: assistdevtest-com-pfx
       containers:
       - name: gru
-        image: projects.registry.vmware.com/jedi/gru:v231225_0006
+        image: projects.registry.vmware.com/jedi/gru:v231225_0021
         volumeMounts:
         - name: pfx-volume
           mountPath: /https
