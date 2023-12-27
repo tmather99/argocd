@@ -2,7 +2,7 @@ appId: anchorservice
 port: 80
 memory: "2048Mi"
 cpu: "1024m"  
-replicas: 5
+replicas: 3
 configmap:
   name: anchorservice-configmap-v1
 image:
