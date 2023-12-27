@@ -17,7 +17,22 @@ spec:
       releaseName: dapr-prom
       values: |-
         extraScrapeConfigs: |
-          - job_name: aggregated-trace-metrics
+          - job_name: 'blackbox'
+            metrics_path: /probe
+            params:
+              module: [http_2xx]  # Look for a HTTP 200 response.
+            static_configs:
+              - targets:
+                - http://gru-dapr.default.svc:9090
+                - http://macminion-dapr.default.svc:9090
+            relabel_configs:
+              - source_labels: [__address__]
+                target_label: __param_target
+              - source_labels: [__param_target]
+                target_label: instance
+              - target_label: __address__
+                replacement: blackbox-prometheus-blackbox-exporter.observability.svc.cluster.local:9115
+         - job_name: aggregated-trace-metrics
             static_configs:
               - targets:
                   - otel-collector-service.observability.svc.cluster.local:8889

@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blackbox-staging-orange
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io  
+  labels:
+    ENV: staging
+spec:
+  project: orange
+  source:
+    repoURL: 'https://prometheus-community.github.io/helm-charts'
+    targetRevision: 8.6.1
+    chart: prometheus-blackbox-exporter
+    helm:
+      releaseName: blackbox
+      values: |-
+        modules:
+          http_2xx:
+            prober: http
+            timeout: 15s
+            http:
+              valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+              follow_redirects: true
+              method: GET
+              preferred_ip_protocol: "ip4"
+  destination:
+    name: 'cloudgate@tmather@jedi-staging-orange.ap-northeast-1.eksctl.io'
+    namespace: observability
+  syncPolicy:
+    syncOptions:
+    - CreatNamespace=true
+    - Replace=true    
+    automated:
+      selfHeal: true

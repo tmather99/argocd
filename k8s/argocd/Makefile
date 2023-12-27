@@ -304,11 +304,18 @@ argocd-deploy-kube-state-metrics:
 argocd-undeploy-kube-state-metrics:
 	-kubectl delete app -n argocd kube-state-metrics-$(ENV)-$(PROJ)
 
+argocd-deploy-blackbox-exporter:
+	kubectl apply -f $(ENV)/$(PROJ)/observability/blackbox.yml
+
+argocd-undeploy-blackbox-exporter:
+	-kubectl delete app -n argocd blackbox-$(ENV)-$(PROJ)
+
 argocd-deploy-observability: use-context-argocd \
 	argocd-deploy-otel-collector \
 	argocd-deploy-kube-state-metrics \
 	argocd-deploy-cadvisor \
 	argocd-deploy-prometheus \
+	argocd-deploy-blackbox-exporter \
 	argocd-deploy-grafana \
 	argocd-deploy-loki \
 	argocd-deploy-tempo
@@ -320,5 +327,6 @@ argocd-undeploy-observability: use-context-argocd \
 	argocd-undeploy-loki \
 	argocd-undeploy-tempo \
 	argocd-undeploy-prometheus \
+	argocd-undeploy-blackbox-exporter \
 	argocd-undeploy-grafana
 	

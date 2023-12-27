@@ -516,10 +516,10 @@ rm-kube-state-metrics:
 
 blackbox-exporter:
 	helm upgrade --install blackbox prometheus-community/prometheus-blackbox-exporter \
-	 --values ./observability/blackbox/values.yml --wait
+	 -n observability --create-namespace --values ./observability/blackbox/values.yml --wait
 
 rm-blackbox-exporter:
-	helm delete blackbox
+	helm delete blackbox -n observability
 	
 up: use-context \
     dapr-install \
@@ -541,6 +541,7 @@ down: use-context \
 
 observability: use-context \
 	prometheus \
+	blackbox-exporter \
 	cadvisor \
 	kube-state-metrics \
 	otel-collector \
@@ -550,6 +551,7 @@ observability: use-context \
 
 rm-observability: use-context \
 	rm-prometheus \
+	rm-blackbox-exporter \
 	rm-cadvisor \
 	rm-kube-state-metrics \
 	rm-otel-collector \

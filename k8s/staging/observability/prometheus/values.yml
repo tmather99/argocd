@@ -13,7 +13,7 @@ extraScrapeConfigs: |
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: blackbox-prometheus-blackbox-exporter.default.svc.cluster.local:9115
+        replacement: blackbox-prometheus-blackbox-exporter.observability.svc.cluster.local:9115
 
   - job_name: aggregated-trace-metrics
     static_configs:
