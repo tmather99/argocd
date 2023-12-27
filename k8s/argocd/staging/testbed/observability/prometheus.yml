@@ -32,7 +32,7 @@ spec:
                 target_label: instance
               - target_label: __address__
                 replacement: blackbox-prometheus-blackbox-exporter.observability.svc.cluster.local:9115
-         - job_name: aggregated-trace-metrics
+          - job_name: aggregated-trace-metrics
             static_configs:
               - targets:
                   - otel-collector-service.observability.svc.cluster.local:8889

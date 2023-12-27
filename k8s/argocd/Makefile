@@ -262,10 +262,10 @@ argocd-undeploy-helm-apps: \
 # 
 # Observability targets
 #
-argocd-deploy-prometheus:
+argocd-deploy-prometheus: use-context-argocd
 	kubectl apply -f $(ENV)/$(PROJ)/observability/prometheus.yml
 
-argocd-undeploy-prometheus:
+argocd-undeploy-prometheus: use-context-argocd
 	-kubectl delete app -n argocd prometheus-$(ENV)-$(PROJ)
 
 argocd-deploy-grafana:
