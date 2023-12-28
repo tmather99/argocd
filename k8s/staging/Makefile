@@ -60,6 +60,7 @@ secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/perfdevice-assistdevtest-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/gru-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
+	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
  
 rm-secrets: 
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/argocd-server-tls.yml
@@ -71,6 +72,7 @@ rm-secrets:
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/perfdevice-assistdevtest-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/gru-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
+	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 
 #
 # ASPNETCORE_Kestrel__Certificates__Default
@@ -152,10 +154,10 @@ rm-nginx-helm:
 	helm delete ingress-nginx -n ingress-nginx
 
 nginx:
-	kubectl apply -f ./clusters/nginx-controller-v1.9.3.yml
+	kubectl apply -f ./clusters/nginx-controller-v1.9.5.yml
 
 rm-nginx:
-	-kubectl delete -f ./clusters/nginx-controller-v1.9.3.yml
+	-kubectl delete -f ./clusters/nginx-controller-v1.9.5.yml
 
 apps-ingress:
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/apps.yml
@@ -199,6 +201,12 @@ macminion-ingress:
 rm-macminion-ingress:
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 
+authminion-ingress:
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/authminion.yml
+
+rm-authminion-ingress:
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/authminion.yml
+
 dapr-dashboard-ingress:
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/dapr-dashboard.yml
 
@@ -238,6 +246,7 @@ ingress: use-context dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/perfdevice.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/authminion.yml
 
 rm-ingress: use-context rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/argocd.yml
@@ -248,6 +257,7 @@ rm-ingress: use-context rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/perfdevice.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/authminion.yml
 
 # 
 # utils targets
@@ -396,11 +406,19 @@ macminion:
 rm-macminion:
 	-helm delete macminion
 
+authminion:
+	helm install authminion apps/testbed/authminion
+
+rm-authminion:
+	-helm delete authminion
+
 testbed: use-context \
+	authminion \
 	gru \
 	macminion
 
 rm-testbed: use-context \
+	rm-authminion \
 	rm-gru \
 	rm-macminion
 
@@ -594,6 +612,7 @@ CNAMES = \
 	perfdevice \
 	gru \
 	macminion \
+	authminion \
 	signalr \
 	signalr-1 \
 	signalr-2

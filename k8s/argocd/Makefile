@@ -36,10 +36,10 @@ helm-repos:
 
 # https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 nginx-kind:
-	kubectl apply -f ingress/nginx-controller-kind-v1.9.3.yml
+	kubectl apply -f ingress/nginx-controller-kind-v1.9.5.yml
 
 rm-nginx-kind:
-	kubectl delete -f ingress/nginx-controller-kind-v1.9.3.yml
+	kubectl delete -f ingress/nginx-controller-kind-v1.9.5.yml
 
 metrics-server:
 	helm upgrade --install --set 'args={--kubelet-insecure-tls}' \
@@ -167,11 +167,19 @@ argocd-deploy-macminion:
 argocd-undeploy-macminion:
 	-kubectl delete app -n argocd macminion-$(ENV)-$(PROJ)
 
+argocd-deploy-authminion:
+	kubectl apply -f $(ENV)/$(PROJ)/testbed/authminion.yml
+
+argocd-undeploy-authminion:
+	-kubectl delete app -n argocd authminion-$(ENV)-$(PROJ)
+
 argocd-deploy-testbed: use-context-argocd \
+	argocd-deploy-authminion \
 	argocd-deploy-gru \
 	argocd-deploy-macminion
 
 argocd-undeploy-testbed: use-context-argocd\
+	argocd-undeploy-authminion \
 	argocd-undeploy-gru \
 	argocd-undeploy-macminion
 
