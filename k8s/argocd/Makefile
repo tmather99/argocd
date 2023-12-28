@@ -225,16 +225,14 @@ argocd-undeploy-apps: use-context-argocd \
 argocd-deploy: use-context-argocd \
 	argocd-deploy-dapr \
 	argocd-deploy-dapr-dashboard \
-	argocd-deploy-utils \
-	argocd-deploy-apps
+	argocd-deploy-utils
 
 #	argocd-undeploy-redis
 #	argocd-undeploy-rabbitmq
 argocd-undeploy: use-context-argocd \
 	argocd-undeploy-dapr \
 	argocd-undeploy-dapr-dashboard \
-	argocd-undeploy-utils \
-	argocd-undeploy-apps
+	argocd-undeploy-utils
 
 #
 # Argocd Helm apps targets
