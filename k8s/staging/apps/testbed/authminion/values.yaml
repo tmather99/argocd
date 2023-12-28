@@ -2,7 +2,7 @@ appId: authminion
 port: 443
 memory: "2048Mi"
 cpu: "1024m"  
-replicas: 1
+replicas: 3
 configmap:
   name: authminion-configmap-v1
 image:

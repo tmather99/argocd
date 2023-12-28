@@ -14,7 +14,7 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "{{ .Values.appId }}"
-        dapr.io/app-port: "8081"
+        dapr.io/app-port: "5001"
         dapr.io/app-ssl: "true"
         dapr.io/config: "tracing"
         dapr.io/enable-metrics: "false"
@@ -33,6 +33,7 @@ spec:
         - name: pfx-volume
           mountPath: /https
         ports:
+        - containerPort: 5001
         - containerPort: 8081
         resources:
           limits:
@@ -42,7 +43,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
         - name: ASPNETCORE_URLS
-          value: "http://+:8080"        
+          value: "https://+:8081"        
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: http://otel-collector-service.observability.svc.cluster.local:4317
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
