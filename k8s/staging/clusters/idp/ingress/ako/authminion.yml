@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: authminion-ingress  
+  namespace: default
+  annotations:
+    passthrough.ako.vmware.com/enabled: "true"
+spec:
+  ingressClassName: avi-ingress-class
+  tls:
+  - hosts:
+      - authminion-staging-idp.assistdevtest.com
+    secretName: authminion-tls
+  rules:
+  - host: authminion-staging-idp.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: authminion-service
+            port:
+              name: https
+              

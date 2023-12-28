@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gru-ingress  
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - gru-staging-iris.assistdevtest.com
+    secretName: gru-tls   
+  rules:
+  - host: gru-staging-iris.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gru-service
+            port: 
+              number: 80  

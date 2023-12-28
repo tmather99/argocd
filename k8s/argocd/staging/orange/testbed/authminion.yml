@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: authminion-staging-argocd
+  name: authminion-staging-orange
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io  
   labels:
     ENV: staging
 spec:
-  project: argocd
+  project: orange
   source:
     repoURL: 'https://github.com/tmather99/argocd.git'
     path: k8s/staging/apps/testbed/authminion
     targetRevision: main
   destination:
-    name: 'cloudgate@tmather@jedi-staging-argocd.ap-northeast-1.eksctl.io'
+    name: 'cloudgate@tmather@jedi-staging-orange.ap-northeast-1.eksctl.io'
     namespace: default
   syncPolicy:
     syncOptions:

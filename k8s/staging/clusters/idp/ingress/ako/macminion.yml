@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: macminion-ingress  
+  annotations:
+    passthrough.ako.vmware.com/enabled: "false"
+spec:
+  ingressClassName: avi-ingress-class
+  tls:
+  - hosts:
+      - macminion-staging-idp.assistdevtest.com
+    secretName: macminion-tls   
+  rules:
+  - host: macminion-staging-idp.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: macminion-service
+            port: 
+              number: 443  

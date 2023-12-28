@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: macminion-ingress  
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - macminion-staging-iris.assistdevtest.com
+    secretName: macminion-tls   
+  rules:
+  - host: macminion-staging-iris.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: macminion-service
+            port: 
+              number: 80  
