@@ -132,11 +132,11 @@ infrasetting:
 rm-infrasetting:
 	-kubectl delete -f ./clusters/$(PROJ)/ingress/ako/infrasetting.yml 
 
-ako: \
+ako: use-context \
 	ako-primary \
 	infrasetting
 
-rm-ako: \
+rm-ako: use-context \
 	rm-ako-primary \
 	rm-infrasetting
 
