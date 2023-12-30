@@ -25,6 +25,7 @@ spec:
               - targets:
                 - http://gru-dapr.default.svc:9090
                 - http://macminion-dapr.default.svc:9090
+                - http://authminion-dapr.default.svc:9090
             relabel_configs:
               - source_labels: [__address__]
                 target_label: __param_target
@@ -41,7 +42,7 @@ spec:
               - targets:
                   - gru-service.default.svc.cluster.local:80
                   - macminion-service.default.svc.cluster.local:80
-                  - authminion-service.default.svc.cluster.local:80
+                  - authminion-metrics-service.default.svc.cluster.local:80
                   - anchorservice-service.default.svc.cluster.local:80
                   - enrollmentservice-service.default.svc.cluster.local:80
                   - cadvisor.observability.svc.cluster.local:8080
