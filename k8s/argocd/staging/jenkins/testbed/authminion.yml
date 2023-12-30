@@ -14,8 +14,9 @@ spec:
     path: k8s/staging/apps/testbed/authminion
     targetRevision: main
     helm:
-      values: |-
-        - idpUrl: 'https://authminion-staging-jenkins.assistdevtest.com'
+      values: |=
+        - idp:
+            url: 'https://authminion-staging-jenkins.assistdevtest.com'
   destination:
     name: 'cloudgate@tmather@jedi-staging-jenkins.ap-northeast-1.eksctl.io'
     namespace: default
