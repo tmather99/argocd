@@ -25,6 +25,7 @@ extraScrapeConfigs: |
       - targets:
           - gru-service.default.svc.cluster.local:80
           - macminion-service.default.svc.cluster.local:80
+          - authminion-service.default.svc.cluster.local:80
           - anchorservice-service.default.svc.cluster.local:80
           - enrollmentservice-service.default.svc.cluster.local:80
           - cadvisor.observability.svc.cluster.local:8080
