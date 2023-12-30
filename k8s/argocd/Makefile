@@ -155,22 +155,22 @@ argocd-undeploy-utils: \
 	argocd-undeploy-seq \
 	argocd-undeploy-redis-commander
 
-argocd-deploy-gru:
+argocd-deploy-gru: use-context-argocd 
 	kubectl apply -f $(ENV)/$(PROJ)/testbed/gru.yml
 
-argocd-undeploy-gru:
+argocd-undeploy-gru: use-context-argocd 
 	-kubectl delete app -n argocd gru-$(ENV)-$(PROJ)
 
-argocd-deploy-macminion:
+argocd-deploy-macminion: use-context-argocd 
 	kubectl apply -f $(ENV)/$(PROJ)/testbed/macminion.yml
 
-argocd-undeploy-macminion:
+argocd-undeploy-macminion: use-context-argocd 
 	-kubectl delete app -n argocd macminion-$(ENV)-$(PROJ)
 
-argocd-deploy-authminion:
+argocd-deploy-authminion: use-context-argocd 
 	kubectl apply -f $(ENV)/$(PROJ)/testbed/authminion.yml
 
-argocd-undeploy-authminion:
+argocd-undeploy-authminion: use-context-argocd 
 	-kubectl delete app -n argocd authminion-$(ENV)-$(PROJ)
 
 argocd-deploy-testbed: use-context-argocd \

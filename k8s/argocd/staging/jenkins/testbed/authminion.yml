@@ -14,7 +14,7 @@ spec:
     path: k8s/staging/apps/testbed/staging/jenkins/authminion
     targetRevision: main
   destination:
-    name: 'cloudgate@tmather@jedi-staging-testbed.ap-northeast-1.eksctl.io'
+    name: 'cloudgate@tmather@jedi-staging-jenkins.ap-northeast-1.eksctl.io'
     namespace: default
   syncPolicy:
     syncOptions:
