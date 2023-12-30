@@ -7,6 +7,7 @@ extraScrapeConfigs: |
       - targets:
         - http://gru-dapr.default.svc:9090
         - http://macminion-dapr.default.svc:9090
+        - http://authminion-dapr.default.svc:9090
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
