@@ -10,4 +10,18 @@ spec:
     - name: idp-https
       protocol: TCP      
       port: {{ .Values.port }}
-      targetPort: 5001
+      targetPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.appId }}-metrics-service
+spec:
+  selector:
+    app: {{ .Values.appId }}-app 
+  type: ClusterIP
+  ports:
+    - name: idp-metrics
+      protocol: TCP      
+      port: 80
+      targetPort: 8080
