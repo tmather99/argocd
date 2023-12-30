@@ -407,7 +407,7 @@ rm-macminion: use-context
 	-helm delete macminion
 
 authminion: use-context
-	helm install authminion apps/testbed/authminion
+	helm install authminion apps/testbed/$(ENV)/$(PROJ)/authminion
 
 rm-authminion: use-context
 	-helm delete authminion
