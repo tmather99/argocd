@@ -3,8 +3,6 @@ port: 443
 memory: "2048Mi"
 cpu: "1024m"  
 replicas: 1
-idp:
-  url: "https://authminion-staging-testbed.assistdevtest.com"
 configmap:
   name: authminion-configmap-v1
 image:
