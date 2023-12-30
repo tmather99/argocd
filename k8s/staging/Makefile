@@ -394,22 +394,22 @@ rm-apps: \
 #
 # ImageGallery targets
 #
-gru:
+gru: use-context
 	helm install gru apps/testbed/gru
 
-rm-gru:
+rm-gru: use-context
 	-helm delete gru
 
-macminion:
+macminion: use-context
 	helm install macminion apps/testbed/macminion
 
-rm-macminion:
+rm-macminion: use-context
 	-helm delete macminion
 
-authminion:
+authminion: use-context
 	helm install authminion apps/testbed/authminion
 
-rm-authminion:
+rm-authminion: use-context
 	-helm delete authminion
 
 testbed: use-context \
