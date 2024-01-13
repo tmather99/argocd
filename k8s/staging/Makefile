@@ -90,7 +90,7 @@ pfx-passwords:
 	 	--from-literal assistdevtest-com-pfx-password="Assist@1"
 
 rm-pfx-passwords:
-	kubectl delete secret pfx-password
+	kubectl delete secret pfx-passwords
 
 pfx: \
 	assistdevtest-com-pfx \
