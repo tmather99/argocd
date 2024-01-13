@@ -61,7 +61,7 @@ argocd-uninstall:
 argocd-password:
 	kubectl -n argocd get secret argocd-secret -o jsonpath="{.data.clearPassword}" | base64 -d && echo
 
-# kubectl create secret tls assistdevops-tls --key="certs/privkey2.pem" --cert="certs/fullchain2.pem" --dry-run=client -o yaml
+# kubectl create secret tls assistdevops-tls --key="certs/privkey3.pem" --cert="certs/fullchain3.pem" --dry-run=client -o yaml
 argocd-secrets:
 	kubectl apply -f ingress/tls-secrets/argocd-$(CERT_TLS)
 
