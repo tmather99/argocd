@@ -10,7 +10,7 @@ metadata:
 spec:
   project: asterix
   source:
-    repoURL: 'ssh://git@stash.air-watch.com:7999/aplnt/argocd.git'
+    repoURL: 'https://github.com/tmather99/argocd.git'
     path: k8s/staging/apps/enrollmentservice
     targetRevision: main
   destination:

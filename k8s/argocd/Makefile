@@ -20,6 +20,7 @@ rm-argocd-cluster:
 init: use-context-argocd \
 	helm-repos \
 	nginx-kind \
+	argocd \
 	metrics-server
 
 helm-repos:

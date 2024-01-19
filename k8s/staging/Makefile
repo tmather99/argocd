@@ -293,7 +293,7 @@ rm-sqlpad:
 # dapr targets
 #
 dapr-install:	
-	helm upgrade --install dapr dapr/dapr --version=1.12.2 -n dapr-system --create-namespace --wait
+	helm upgrade --install dapr dapr/dapr --version=1.12.4 -n dapr-system --create-namespace --wait
 
 dapr-uninstall:
 	helm uninstall dapr -n dapr-system
