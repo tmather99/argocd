@@ -66,28 +66,3 @@ spec:
       targetPort: prom-metrics
   selector:
     app: otel-collector
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: otel-collector-classic-service
-  namespace: observability
-  labels:
-    app: otel-collector
-spec:
-  type: LoadBalancer
-  ports:
-    - name: otel-http
-      port: 4318
-      protocol: TCP
-      targetPort: 4318
-    - name: otel-grpc
-      port: 4317
-      protocol: TCP
-      targetPort: 4317
-    - name: prom-metrics
-      port: 8889
-      protocol: TCP
-      targetPort: prom-metrics
-  selector:
-    app: otel-collector
