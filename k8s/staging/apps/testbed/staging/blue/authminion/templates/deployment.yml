@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appId }}-app
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.appId }}-app
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appId }}-app
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "{{ .Values.appId }}"
+        dapr.io/app-port: "8081"
+        dapr.io/app-protocol: "https"
+        dapr.io/config: "tracing"
+        dapr.io/enable-metrics: "false"
+        dapr.io/metrics-port: "9090" 
+        sidecar.opentelemetry.io/inject: "false"
+    spec:      
+      volumes:
+      - name: pfx-volume
+        secret:
+          secretName: assistdevtest-com-pfx
+      containers:
+      - name: {{ .Values.appId }}
+        image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: pfx-volume
+          mountPath: /https
+        ports:
+        - containerPort: 5001
+        - containerPort: 8080
+        - containerPort: 8081
+        resources:
+          limits:
+            memory: {{ .Values.memory }}
+            cpu: {{ .Values.cpu }}
+        env:
+        - name: IDP_URL
+          value:  {{.Values.idpUrl}}
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"        
+        - name: ASPNETCORE_URLS
+          value: "http://+:8080;https://+:8081"        
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: http://otel-collector-service.observability.svc.cluster.local:4317
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: grpc
+        - name: SEQ_SERVER_URL
+          value: http://seq-service.default.svc.cluster.local        
+        - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+          value: "/https/assistdevtest-com.pfx"        
+        - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+          valueFrom:
+            secretKeyRef:
+              name: pfx-passwords
+              key: assistdevtest-com-pfx-password
+        - name: ConnectionStrings__IDP
+          value: "Server=sql.assistdevtest.com;Database=Authminion;User Id=sa;Password=AssistJedi2023;MultipleActiveResultSets=true;TrustServerCertificate=True"
+        - name: ConnectionStrings__DataProtection
+          value: "jedi-staging-iris-redis.nsg6a7.ng.0001.apne1.cache.amazonaws.com:6379"
+
