@@ -18,10 +18,14 @@ rm-argocd-cluster:
 # init targets
 #
 init: use-context-argocd \
+	ns \
 	helm-repos \
 	nginx-kind \
-	argocd \
 	metrics-server
+
+ns:	
+	kubectl create namespace argocd
+
 
 helm-repos:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
