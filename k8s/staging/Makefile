@@ -58,6 +58,7 @@ secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/perfdevice-assistdevtest-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/gru-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
+	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
  
 rm-secrets: 
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
@@ -67,6 +68,7 @@ rm-secrets:
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/perfdevice-assistdevtest-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/gru-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
+	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 
 #
 # ASPNETCORE_Kestrel__Certificates__Default
