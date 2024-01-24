@@ -111,13 +111,18 @@ argocd-add-project:
 	argocd proj allow-cluster-resource $(PROJ) '*' '*' --grpc-web
 
 argocd-add-cluster:
-	argocd cluster add cloudgate@tmather@jedi-$(ENV)-$(PROJ).$(REGION).eksctl.io --grpc-web
+	argocd cluster add cloudgate@tmather@jedi-$(ENV)-$(PROJ).$(REGION).eksctl.io --grpc-web -y
 
 argocd-connect-repo:
 	argocd repo add $(GIT_REPO) --insecure-ignore-host-key
 
 argocd-add-oci-repo:
 	argocd repo add projects.registry.vmware.com:443/jedi --type helm --name oci-repo --enable-oci
+
+argocd-settings: \
+	argocd-add-project \
+	argocd-connect-repo \
+	argocd-add-cluster
 
 #
 # Argocd application deployments

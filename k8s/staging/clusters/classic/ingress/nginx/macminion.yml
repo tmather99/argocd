@@ -9,7 +9,7 @@ spec:
       - macminion-staging-jenkins.assistdevtest.com
     secretName: macminion-tls   
   rules:
-  - host: macminion-staging-jenkins.assistdevtest.com
+  - host: macminion-staging-classic.assistdevtest.com
     http:
       paths:      
       - path: /
