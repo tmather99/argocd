@@ -3,7 +3,7 @@ kind: ClusterConfig
 metadata:
   name: jedi-staging-idp
   region: ap-northeast-1
-  version: "1.28"
+  version: "1.29"
  
 vpc:
   id: vpc-024ffa78034e61c48
@@ -24,7 +24,7 @@ iam:
  
 addons:
 - name: aws-ebs-csi-driver
-  version: v1.23.0-eksbuild.1
+  version: v1.26.1-eksbuild.1
   attachPolicyARNs:
   - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
  
