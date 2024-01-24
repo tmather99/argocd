@@ -1,0 +1,11 @@
+appId: authminion
+port: 443
+memory: "2048Mi"
+cpu: "1024m"  
+replicas: 1
+idpUrl: "https://authminion-staging-idp.assistdevtest.com"
+configmap:
+  name: authminion-configmap-v1
+image:
+  name: projects.registry.vmware.com/jedi/authminion
+  tag: v231225_0037
