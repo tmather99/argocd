@@ -87,8 +87,8 @@ L4Settings:
 ControllerSettings:
   serviceEngineGroupName: Default-Group   # Name of the ServiceEngine Group.
   controllerVersion: '22.1.4' # The controller API version
-  cloudName: 'AWS EKS'   # The configured cloud name on the Avi controller.
-  controllerHost: '13.114.33.251' # IP address or Hostname of Avi Controller
+  cloudName: 'Default-Cloud'   # The configured cloud name on the Avi controller.
+  controllerHost: '18.182.5.158' # asterix-alb.assistdevtest.com  IP address or Hostname of Avi Controller
   tenantName: admin   # Name of the tenant where all the AKO objects will be created in AVI.
 
 nodePortSelector: # Only applicable if serviceType is NodePort
@@ -114,7 +114,7 @@ rbac:
 
 avicredentials:
   username: 'admin'
-  password: 'Assist@2023'
+  password: 'Assist@2024'
   authtoken:
   certificateAuthorityData:
 

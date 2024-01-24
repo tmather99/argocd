@@ -64,7 +64,7 @@ NetworkSettings:
   # If duplicate networks are present for the network name, networkUUID should be used for appropriate network.
   # vipNetworkList: []
   vipNetworkList:
-    - networkName: subnet-075dfda1bc393d878
+    - networkName: subnet-07f4c87da8bc213ee
   #    networkUUID: net-1234
   #    cidr: 10.21.0.0/16
   #    v6cidr: 2002::1234:abcd:ffff:c0a8:101/64 # Setting this will enable the VS networks to use ipv6 
@@ -87,8 +87,8 @@ L4Settings:
 ControllerSettings:
   serviceEngineGroupName: Default-Group   # Name of the ServiceEngine Group.
   controllerVersion: '22.1.4' # The controller API version
-  cloudName: 'AWS EKS'   # The configured cloud name on the Avi controller.
-  controllerHost: '13.114.33.251' # IP address or Hostname of Avi Controller
+  cloudName: Default-Cloud   # The configured cloud name on the Avi controller.
+  controllerHost: '3.113.10.42' # iris-alb.assistdevtest.com  IP address or Hostname of Avi Controller
   tenantName: admin   # Name of the tenant where all the AKO objects will be created in AVI.
 
 nodePortSelector: # Only applicable if serviceType is NodePort
@@ -114,7 +114,7 @@ rbac:
 
 avicredentials:
   username: 'admin'
-  password: 'Assist@2023'
+  password: 'Assist@2024'
   authtoken:
   certificateAuthorityData:
 
