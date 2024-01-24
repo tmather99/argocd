@@ -1,12 +1,12 @@
 TAG             = v231201_0002
 HELM_VERSION    = 0.12.02
 ENV             = staging
-PROJ            = green
+PROJ            = jenkins
 REPO            = harbor-repo.vmware.com
 HARBOR_PROJ     = $(REPO)/jedi
 REPO_TAG        = projects.registry.vmware.com
 HARBOR_PROJ_TAG = $(REPO_TAG)/jedi
-INGRESS_TYPE    = ingress/nginx
+INGRESS_TYPE    = ingress/ako
 
 ifeq ($(PROJ),blue)
 REGION = ap-northeast-1
@@ -27,8 +27,6 @@ REGION = ap-northeast-1
 else ifeq ($(PROJ),idp)
 REGION = ap-northeast-1
 else ifeq ($(PROJ),idp-asterix)
-REGION = ap-northeast-1
-else ifeq ($(PROJ),argocd)
 REGION = ap-northeast-1
 else ifeq ($(PROJ),classic)
 REGION = ap-northeast-1
