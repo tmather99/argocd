@@ -97,6 +97,11 @@ rm-argocd-asterix-ingress:
 #
 # Argocd settings
 #
+argocd-update-password:
+	$(eval PWD := $(shell kubectl -n argocd get secret argocd-secret -o jsonpath="{.data.clearPassword}" | base64 -d))
+	argocd login argocd.assistdevtest.com --username admin --password $(PWD) --grpc-web
+	argocd account update-password --account admin --current-password $(PWD) --new-password Assist@1 --server argocd.assistdevtest.com --grpc-web
+
 argocd-login:
 	argocd login argocd.assistdevtest.com --username admin --password Assist@1 --grpc-web
 
