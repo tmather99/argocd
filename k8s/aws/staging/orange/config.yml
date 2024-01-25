@@ -31,7 +31,7 @@ addons:
 managedNodeGroups:
   - name: managed-ng-jedi-staging-orange
     instanceType: m6a.xlarge
-    privateNetworking: false
+    privateNetworking: true
     minSize: 5
     maxSize: 5
     desiredCapacity: 5
