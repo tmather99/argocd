@@ -6,7 +6,7 @@ REPO            = harbor-repo.vmware.com
 HARBOR_PROJ     = $(REPO)/jedi
 REPO_TAG        = projects.registry.vmware.com
 HARBOR_PROJ_TAG = $(REPO_TAG)/jedi
-INGRESS_TYPE    = ingress/ako
+INGRESS_TYPE    = ingress/nginx
 
 ifeq ($(PROJ),blue)
 REGION = ap-northeast-1

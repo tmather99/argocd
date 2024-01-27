@@ -623,6 +623,7 @@ CNAMES = \
 	gru \
 	macminion \
 	authminion \
+	webapp-1 \
 	signalr \
 	signalr-1 \
 	signalr-2
