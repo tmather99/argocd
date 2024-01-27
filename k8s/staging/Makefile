@@ -59,6 +59,7 @@ secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/gru-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
+	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
  
 rm-secrets: 
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
@@ -69,6 +70,7 @@ rm-secrets:
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/gru-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
+	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
 
 #
 # ASPNETCORE_Kestrel__Certificates__Default
@@ -233,6 +235,12 @@ otel-collector-ingress:
 rm-otel-collector-ingress:	
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-collector.yml
 
+webapp-1-ingress:	
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webapp-1.yml
+
+rm-webapp-1-ingress:	
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webapp-1.yml
+
 ingress: use-context dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/grafana.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/utils.yml
@@ -241,6 +249,7 @@ ingress: use-context dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/authminion.yml
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webapp-1.yml
 
 rm-ingress: use-context rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/grafana.yml
@@ -250,6 +259,7 @@ rm-ingress: use-context rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/gru.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/authminion.yml
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webapp-1.yml
 
 # 
 # utils targets
@@ -404,15 +414,23 @@ authminion: use-context
 rm-authminion: use-context
 	-helm delete authminion
 
+webapp-1: use-context
+	helm install webapp-1 apps/testbed/$(ENV)/$(PROJ)/webapp-1
+
+rm-webapp-1: use-context
+	-helm delete webapp-1
+
 testbed: use-context \
 	authminion \
 	gru \
-	macminion
+	macminion \
+	webapp-1
 
 rm-testbed: use-context \
 	rm-authminion \
 	rm-gru \
-	rm-macminion
+	rm-macminion \
+	webapp-1
 
 #
 # ImageGallery targets

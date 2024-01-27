@@ -189,15 +189,23 @@ argocd-deploy-authminion: use-context-argocd
 argocd-undeploy-authminion: use-context-argocd 
 	-kubectl delete app -n argocd authminion-$(ENV)-$(PROJ)
 
+argocd-deploy-webapp-1: use-context-argocd 
+	kubectl apply -f $(ENV)/$(PROJ)/testbed/webapp-1.yml
+
+argocd-undeploy-webapp-1: use-context-argocd 
+	-kubectl delete app -n argocd webapp-1-$(ENV)-$(PROJ)
+
 argocd-deploy-testbed: use-context-argocd \
 	argocd-deploy-authminion \
 	argocd-deploy-gru \
-	argocd-deploy-macminion
+	argocd-deploy-macminion \
+	argocd-deploy-webapp-1
 
 argocd-undeploy-testbed: use-context-argocd\
 	argocd-undeploy-authminion \
 	argocd-undeploy-gru \
-	argocd-undeploy-macminion
+	argocd-undeploy-macminion \
+	argocd-undeploy-webapp-1
 
 #
 # Argocd apps targets

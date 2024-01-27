@@ -1,0 +1,11 @@
+appId: webapp-1
+port: 80
+memory: "2048Mi"
+cpu: "1024m"  
+replicas: 1
+idpUrl: "https://authminion-staging-testbed.assistdevtest.com"
+configmap:
+  name: webapp-1-configmap-v1
+image:
+  name: projects.registry.vmware.com/jedi/webapp-1
+  tag: v240127_001
