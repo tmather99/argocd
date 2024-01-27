@@ -7,4 +7,4 @@ configmap:
   name: gru-configmap-v1
 image:
   name: projects.registry.vmware.com/jedi/gru
-  tag: v240127_001
+  tag: v240127_002
