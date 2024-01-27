@@ -8,4 +8,4 @@ configmap:
   name: authminion-configmap-v1
 image:
   name: projects.registry.vmware.com/jedi/authminion
-  tag: v240126_001
+  tag: v240127_001
