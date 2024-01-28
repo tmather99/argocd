@@ -12,10 +12,10 @@ spec:
       labels:
         app: {{ .Values.appId }}-app
       annotations:
-        dapr.io/enabled: "true"
+        dapr.io/enabled: "false"
         dapr.io/app-id: "{{ .Values.appId }}"
-        dapr.io/app-port: "8081"
-        dapr.io/app-protocol: "https"
+        dapr.io/app-port: "8080"
+        dapr.io/app-ssl: "false"
         dapr.io/config: "tracing"
         dapr.io/enable-metrics: "false"
         dapr.io/metrics-port: "9090" 
@@ -33,9 +33,7 @@ spec:
         - name: pfx-volume
           mountPath: /https
         ports:
-        - containerPort: 5001
         - containerPort: 8080
-        - containerPort: 8081
         resources:
           limits:
             memory: {{ .Values.memory }}
@@ -46,7 +44,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
         - name: ASPNETCORE_URLS
-          value: "http://+:8080;https://+:8081"        
+          value: "http://+:8080"        
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: http://otel-collector-service.observability.svc.cluster.local:4317
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
@@ -60,8 +58,7 @@ spec:
             secretKeyRef:
               name: pfx-passwords
               key: assistdevtest-com-pfx-password
-        - name: ConnectionStrings__IDP
-          value: "Server=sql.assistdevtest.com;Database=Authminion;User Id=sa;Password=AssistJedi2023;MultipleActiveResultSets=true;TrustServerCertificate=True"
-        - name: ConnectionStrings__DataProtection
-          value: "jedi-staging-iris-redis.nsg6a7.ng.0001.apne1.cache.amazonaws.com:6379"
-
+        - name: IdpServerUri
+          value: "https://idp.assistdevtest.com"
+        - name: ConnectionStrings__GlobomanticsDb
+          value: "Server=sql.assistdevtest.com;Database=Globomantics;User Id=sa;Password=AssistJedi2023;MultipleActiveResultSets=true;TrustServerCertificate=True"

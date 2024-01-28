@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-1-ingress  
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - webapp-1-staging-blue.assistdevtest.com
+    secretName: webapp-1-tls   
+  rules:
+  - host: webapp-1-staging-blue.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp-1-service
+            port: 
+              number: 80  

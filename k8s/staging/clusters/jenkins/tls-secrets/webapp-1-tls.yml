@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: webapp-1-tls
+  namespace: default
+spec:
+  secretName: webapp-1-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - webapp-1-staging-jenkins.assistdevtest.com
