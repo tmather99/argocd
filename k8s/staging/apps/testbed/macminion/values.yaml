@@ -7,4 +7,4 @@ configmap:
   name: macminion-configmap-v1
 image:
   name: projects.registry.vmware.com/jedi/macminion
-  tag: v240127_003
+  tag: v240128_001

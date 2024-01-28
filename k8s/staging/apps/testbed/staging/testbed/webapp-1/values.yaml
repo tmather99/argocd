@@ -8,4 +8,4 @@ configmap:
   name: webapp-1-configmap-v1
 image:
   name: projects.registry.vmware.com/jedi/webapp-1
-  tag: v240127_003
+  tag: v240128_001
