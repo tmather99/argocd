@@ -609,7 +609,7 @@ define update_dns_record
 	aws route53 change-resource-record-sets \
 		--hosted-zone-id ${ZONE_ID} \
 		--change-batch '{ "Changes": \
-		[{ "Action" : "UPSERT" ,"ResourceRecordSet" : \
+		[{ "Action" : "'${3}'" ,"ResourceRecordSet" : \
 		{ "Name" : "'${1}'.$(DOMAIN)" ,"Type" : "CNAME" ,"TTL" : 120 ,"ResourceRecords" : \
 		[{ "Value" : "'${2}'" }] } }] }'
 endef
@@ -637,7 +637,10 @@ CNAMES = \
 	signalr-2
 
 dns:
-	$(foreach CNAME, $(CNAMES),$(call update_dns_record,$(CNAME)-$(ENV)-$(PROJ),$(CNAME_VALUE))&)
+	$(foreach CNAME, $(CNAMES),$(call update_dns_record,$(CNAME)-$(ENV)-$(PROJ),$(CNAME_VALUE),'UPSERT')&)
+
+rm-dns:
+	$(foreach CNAME, $(CNAMES),$(call update_dns_record,$(CNAME)-$(ENV)-$(PROJ),$(CNAME_VALUE),'DELETE')&)
 
 SQL_CNAME_VALUE = `kubectl get service globosql-elb \
 				-o jsonpath='{.status.loadBalancer.ingress[0].hostname}'`
