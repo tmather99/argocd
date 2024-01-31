@@ -50,7 +50,7 @@ cluster-issuer:
 rm-cluster-issuer:
 	kubectl delete -f ./clusters/cluster-issuer.yml
 
-secrets: 
+tls-secrets: 
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/observability-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/assistdevtest-com-tls.yml
@@ -61,7 +61,7 @@ secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
  
-rm-secrets: 
+rm-tls-secrets: 
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/observability-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/assistdevtest-com-tls.yml
@@ -341,6 +341,14 @@ rm-dapr-configs: use-context \
     rm-dapr-pubsub-rabbitmq \
 	rm-dapr-tenants-secrets \
 	rm-dapr-tracing
+
+secrets:
+	dapr-configs \
+	pfx
+
+rm-secrets:
+	rm-dapr-configs \
+	rm-prx	
 
 #
 # apps targets
