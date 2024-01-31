@@ -10,6 +10,11 @@ init: \
 	nginx \
 	metrics-server
 
+rm-init: \
+	rm-ns \
+	rm-nginx \
+	rm-metrics-server
+
 ns:	
 	kubectl create namespace argocd
 	kubectl create namespace dapr-system
@@ -25,12 +30,25 @@ helm-repos:
 	helm repo add bitnami https://charts.bitnami.com/bitnami
 	helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 	helm repo add grafana https://grafana.github.io/helm-charts
-	helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
-	helm repo add dapr https://dapr.github.io/helm-charts/
+	helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server
+	helm repo add dapr https://dapr.github.io/helm-charts
 	helm repo add jetstack https://charts.jetstack.io
 	helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 	helm repo add ckotzbauer https://ckotzbauer.github.io/helm-charts
 	helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
+	helm repo update
+
+rm-helm-repos:
+	helm repo remove ingress-nginx
+	helm repo remove bitnami
+	helm repo remove prometheus-community
+	helm repo remove grafana
+	helm repo remove metrics-server
+	helm repo remove dapr
+	helm repo remove jetstack
+	helm repo remove open-telemetry
+	helm repo remove ckotzbauer
+	helm repo remove sealed-secrets
 	helm repo update
 
 #
