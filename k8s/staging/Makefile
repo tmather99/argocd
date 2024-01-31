@@ -68,6 +68,14 @@ cluster-issuer:
 rm-cluster-issuer:
 	kubectl delete -f ./clusters/cluster-issuer.yml
 
+ca: \
+	cert-manager \
+	cluster-issuer
+
+rm-ca: \
+	rm-cluster-issuer \
+	rm-cert-manager
+
 tls-secrets: 
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/observability-tls.yml
