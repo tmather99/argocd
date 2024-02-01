@@ -374,7 +374,7 @@ secrets: use-context \
 
 rm-secrets: use-context \
 	rm-dapr-configs \
-	rm-prx	
+	rm-pfx	
 
 #
 # apps targets
