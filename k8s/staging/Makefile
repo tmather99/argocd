@@ -368,11 +368,11 @@ rm-dapr-configs: use-context \
 	rm-dapr-tenants-secrets \
 	rm-dapr-tracing
 
-secrets:
+secrets: use-context \
 	dapr-configs \
 	pfx
 
-rm-secrets:
+rm-secrets: use-context \
 	rm-dapr-configs \
 	rm-prx	
 

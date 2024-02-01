@@ -82,18 +82,6 @@ argocd-ingress:
 rm-argocd-ingress:
 	kubectl delete -f ingress/argocd.yml
 
-argocd-iris-ingress:
-	kubectl apply -f ingress/argocd-iris.yml
-
-rm-argocd-iris-ingress:
-	kubectl delete -f ingress/argocd-iris.yml
-
-argocd-asterix-ingress:
-	kubectl apply -f ingress/argocd-asterix.yml
-
-rm-argocd-asterix-ingress:
-	kubectl delete -f ingress/argocd-asterix.yml
-
 #
 # Argocd settings
 #
@@ -104,12 +92,6 @@ argocd-update-password:
 
 argocd-login:
 	argocd login argocd.assistdevtest.com --username admin --password Assist@1 --grpc-web
-
-argocd-iris-login:
-	argocd login argocd-iris.assistdevtest.com --username admin --password Assist@1 --grpc-web
-
-argocd-asterix-login:
-	argocd login argocd-asterix.assistdevtest.com --username admin --password Assist@1 --grpc-web
 
 argocd-add-project:
 	argocd proj create $(PROJ) --dest *,* --src '*' --grpc-web
@@ -347,16 +329,16 @@ argocd-deploy-observability: use-context-argocd \
 	argocd-deploy-prometheus \
 	argocd-deploy-blackbox-exporter \
 	argocd-deploy-grafana \
-	argocd-deploy-loki \
-	argocd-deploy-tempo
+	argocd-deploy-tempo \
+	argocd-deploy-loki
 
 argocd-undeploy-observability: use-context-argocd \
 	argocd-undeploy-otel-collector \
 	argocd-undeploy-kube-state-metrics \
 	argocd-undeploy-cadvisor \
-	argocd-undeploy-loki \
-	argocd-undeploy-tempo \
 	argocd-undeploy-prometheus \
 	argocd-undeploy-blackbox-exporter \
-	argocd-undeploy-grafana
+	argocd-undeploy-grafana \
+	argocd-undeploy-tempo \
+	argocd-undeploy-loki 
 	
