@@ -5,6 +5,26 @@ metadata:
   namespace: observability
 data:
   otel-collector-config: |-
+    extensions:
+      basicauth/otlp:
+        client_auth:
+          username: 847498
+          password: glc_eyJvIjoiMTA0NDc2NCIsIm4iOiJzdGFjay04NDc0OTgtb3RscC13cml0ZS1vbHRwIiwiayI6IlZhTEZMWTJQbDdlMEN0NUdUaDU0MTY5MiIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19
+    exporters:
+      otlphttp:
+        auth:
+          authenticator: basicauth/otlp
+        endpoint: https://otlp-gateway-prod-us-west-0.grafana.net/otlp
+      prometheus:
+        endpoint: ":8889"
+      otlp:
+        endpoint: tempo.observability.svc.cluster.local:4317
+        tls:
+          insecure: true    
+      loki:
+        endpoint: http://loki.observability:3100/loki/api/v1/push
+        tls:
+          insecure: true
     receivers:
       otlp:
         protocols:
@@ -14,27 +34,17 @@ data:
       batch:
         timeout: 15s
         send_batch_size: 10
-    exporters:
-      prometheus:
-        endpoint: ":8889"
-      otlp:
-        endpoint: tempo.observability.svc.cluster.local:4317
-        tls:
-          insecure: true    
-      loki:
-        endpoint: https://801904:glc_eyJvIjoiMTA0NDc2NCIsIm4iOiJzdGFjay04NDc0OTgtaGwtcmVhZC10bWF0aGVyZXVjLWxva2ktYXBpLXRva2VuIiwiayI6ImdnODlyOEcxWUoxME1YdTg5RzY4VkRrYiIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19@logs-prod-021.grafana.net/loki/api/v1/push
-        tls:
-          insecure: true
     service:
+      extensions: [basicauth/otlp]
       pipelines:
         metrics:
           receivers: [otlp]
-          exporters: [prometheus]
+          exporters: [prometheus, otlphttp]
         traces:
           receivers: [otlp]
           processors: [batch]
-          exporters: [otlp] 
+          exporters: [otlp, otlphttp] 
         logs:
           receivers: [otlp]
           processors: [batch]
-          exporters: [loki] 
+          exporters: [loki, otlphttp] 

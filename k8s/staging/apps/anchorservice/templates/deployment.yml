@@ -47,6 +47,8 @@ spec:
         - name: SEQ_ENDPOINT
           value: http://seq-service.default.svc.cluster.local        
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: http://otel-collector-service.observability.svc.cluster.local:4317
+          value: {{ .Values.OTEL_EXPORTER_OTLP_ENDPOINT }}
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
-          value: grpc
+          value: {{ .Values.OTEL_EXPORTER_OTLP_PROTOCOL }}
+        - name: OTEL_EXPORTER_OTLP_HEADERS
+          value: {{ .Values.OTEL_EXPORTER_OTLP_HEADERS }}

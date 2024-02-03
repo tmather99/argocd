@@ -425,12 +425,12 @@ rm-pubsub: \
 	rm-consumer \
 	rm-producer
 
-apps: \
+apps: use-context \
 	anchorservice \
 	enrollmentservice \
 	perfdevice
 
-rm-apps: \
+rm-apps: use-context \
 	rm-anchorservice \
 	rm-enrollmentservice \
 	rm-perfdevice
@@ -560,10 +560,10 @@ tempo:
 rm-tempo:
 	helm delete tempo -n observability
 
-otel-collector:
+otel-collector: use-context
 	kubectl apply -f ./observability/otel-collector --wait
 
-rm-otel-collector:
+rm-otel-collector: use-context
 	kubectl delete -f ./observability/otel-collector
 
 metrics-server:
