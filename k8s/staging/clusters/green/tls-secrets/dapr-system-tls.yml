@@ -10,4 +10,3 @@ spec:
     kind: ClusterIssuer
   dnsNames:
   - dapr-staging-green.assistdevtest.com
-  - dapr1-staging-green.assistdevtest.com

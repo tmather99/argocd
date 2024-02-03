@@ -13,4 +13,3 @@ spec:
   - prometheus-staging-green.assistdevtest.com
   - cadvisor-staging-green.assistdevtest.com
   - kube-state-metrics-staging-green.assistdevtest.com
-  - grafana1-staging-green.assistdevtest.com
