@@ -8,3 +8,7 @@ configmap:
 image:
   name: projects.registry.vmware.com/jedi/macminion
   tag: v240128_001
+
+OTEL_EXPORTER_OTLP_ENDPOINT: "https://otlp-gateway-prod-us-west-0.grafana.net/otlp"
+OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
+OTEL_EXPORTER_OTLP_HEADERS: "Authorization=Basic ODQ3NDk4OmdsY19leUp2SWpvaU1UQTBORGMyTkNJc0ltNGlPaUp6ZEdGamF5MDRORGMwT1RndGIzUnNjQzEzY21sMFpTMXZkR1ZzTFdGd2FTMTBiMnRsYmlJc0ltc2lPaUpYV0RFMFdrVTFOWEE0WVZsVVF6azNPVGgwTjFwd1JHa2lMQ0p0SWpwN0luSWlPaUp3Y205a0xYVnpMWGRsYzNRdE1DSjlmUT0"  

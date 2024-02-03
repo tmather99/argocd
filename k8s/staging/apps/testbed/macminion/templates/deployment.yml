@@ -44,11 +44,11 @@ spec:
         - name: ASPNETCORE_URLS
           value: "http://+:8080"        
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: http://otel-collector-service.observability.svc.cluster.local:4317
+          value: {{ .Values.OTEL_EXPORTER_OTLP_ENDPOINT }}
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
-          value: grpc
-        - name: SEQ_SERVER_URL
-          value: http://seq-service.default.svc.cluster.local        
+          value: {{ .Values.OTEL_EXPORTER_OTLP_PROTOCOL }}
+        - name: OTEL_EXPORTER_OTLP_HEADERS
+          value: {{ .Values.OTEL_EXPORTER_OTLP_HEADERS }}
         - name: ASPNETCORE_Kestrel__Certificates__Default__Path
           value: "/https/assistdevtest-com.pfx"        
         - name: ASPNETCORE_Kestrel__Certificates__Default__Password

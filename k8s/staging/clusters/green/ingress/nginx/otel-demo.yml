@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: otel-demo-ingress  
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - otel-demo-staging-green.assistdevtest.com
+    secretName: otel-demo-tls   
+  rules:
+  - host: otel-demo-staging-green.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-otel-demo-frontendproxy
+            port: 
+              number: 8080

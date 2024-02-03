@@ -22,7 +22,7 @@ data:
         tls:
           insecure: true    
       loki:
-        endpoint: http://loki.observability:3100/loki/api/v1/push
+        endpoint: https://801904:glc_eyJvIjoiMTA0NDc2NCIsIm4iOiJzdGFjay04NDc0OTgtaGwtcmVhZC10bWF0aGVyZXVjLWxva2ktYXBpLXRva2VuIiwiayI6ImdnODlyOEcxWUoxME1YdTg5RzY4VkRrYiIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19@logs-prod-021.grafana.net/loki/api/v1/push
         tls:
           insecure: true
     service:

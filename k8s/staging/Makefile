@@ -86,6 +86,7 @@ tls-secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
+	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/otel-demo-tls.yml
  
 rm-tls-secrets: 
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
@@ -97,6 +98,7 @@ rm-tls-secrets:
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
+	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/otel-demo-tls.yml
 
 #
 # ASPNETCORE_Kestrel__Certificates__Default
@@ -266,6 +268,12 @@ webapp-1-ingress:
 
 rm-webapp-1-ingress:	
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webapp-1.yml
+
+otel-demo-ingress:	
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-demo.yml
+
+rm-otel-demo-ingress:	
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-demo.yml
 
 ingress: use-context dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/grafana.yml
@@ -658,6 +666,7 @@ CNAMES = \
 	macminion \
 	authminion \
 	webapp-1 \
+	otel-demo \
 	signalr \
 	signalr-1 \
 	signalr-2
