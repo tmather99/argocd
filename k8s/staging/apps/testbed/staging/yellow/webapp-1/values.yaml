@@ -9,3 +9,7 @@ configmap:
 image:
   name: projects.registry.vmware.com/jedi/webapp-1
   tag: v240128_001
+
+OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"
+OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+OTEL_EXPORTER_OTLP_HEADERS:
