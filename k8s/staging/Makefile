@@ -86,7 +86,6 @@ tls-secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
-	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/otel-demo-tls.yml
  
 rm-tls-secrets: 
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
@@ -98,7 +97,6 @@ rm-tls-secrets:
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
-	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/otel-demo-tls.yml
 
 #
 # ASPNETCORE_Kestrel__Certificates__Default

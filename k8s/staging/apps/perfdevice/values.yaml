@@ -2,7 +2,7 @@ appId: perfdevice
 port: 80
 memory: "512Mi"
 cpu: "512m"  
-replicas: 3
+replicas: 1
 # anchorUrl: https://perfdevice-staging-purple.assistdevtest.com
 anchorUrl: http://anchorservice-service
 configmap:
