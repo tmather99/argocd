@@ -30,11 +30,11 @@ addons:
  
 managedNodeGroups:
   - name: managed-ng-jedi-staging-idp-asterix
-    instanceType: m6a.xlarge
+    instanceType: m7a.xlarge
     privateNetworking: true
-    minSize: 5
-    maxSize: 5
-    desiredCapacity: 5
+    minSize: 3
+    maxSize: 3
+    desiredCapacity: 3
     volumeSize: 80
     ssh:
       allow: true
