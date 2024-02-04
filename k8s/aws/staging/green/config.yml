@@ -35,6 +35,6 @@ managedNodeGroups:
     minSize: 3
     maxSize: 3
     desiredCapacity: 3
-    volumeSize: 80
+    volumeSize: 20
     ssh:
       allow: true
