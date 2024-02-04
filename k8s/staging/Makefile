@@ -173,7 +173,7 @@ nginx-helm:
 	helm upgrade --install ingress-nginx bitnami/nginx-ingress-controller \
 		--create-namespace -n ingress-nginx \
 		--set metrics.enabled=true \
-		--set replicaCount=3 \
+		--set replicaCount=1 \
 		--set metrics.service.ports.metrics=10254
 
 rm-nginx-helm:
