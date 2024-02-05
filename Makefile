@@ -1,7 +1,7 @@
 TAG             = v231201_0002
 HELM_VERSION    = 0.12.02
 ENV             = staging
-PROJ            = blue
+PROJ            = testbed
 REPO            = harbor-repo.vmware.com
 HARBOR_PROJ     = $(REPO)/jedi
 REPO_TAG        = projects.registry.vmware.com

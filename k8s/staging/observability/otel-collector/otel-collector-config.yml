@@ -5,16 +5,19 @@ metadata:
   namespace: observability
 data:
   otel-collector-config: |-
+
     extensions:
       basicauth/otlp:
         client_auth:
           username: 847498
           password: glc_eyJvIjoiMTA0NDc2NCIsIm4iOiJzdGFjay04NDc0OTgtb3RscC13cml0ZS1vbHRwIiwiayI6IlZhTEZMWTJQbDdlMEN0NUdUaDU0MTY5MiIsIm0iOnsiciI6InByb2QtdXMtd2VzdC0wIn19
-    exporters:
+
+    exporters:     
       otlphttp:
         auth:
           authenticator: basicauth/otlp
         endpoint: https://otlp-gateway-prod-us-west-0.grafana.net/otlp
+
       prometheus:
         endpoint: ":8889"
       otlp:
@@ -25,15 +28,18 @@ data:
         endpoint: http://loki.observability:3100/loki/api/v1/push
         tls:
           insecure: true
+
     receivers:
       otlp:
         protocols:
           grpc:
           http:
+
     processors:
       batch:
         timeout: 15s
         send_batch_size: 10
+    
     service:
       extensions: [basicauth/otlp]
       pipelines:
