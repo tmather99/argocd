@@ -41,10 +41,10 @@ helm-repos:
 
 # https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 nginx-kind:
-	kubectl apply -f ingress/nginx-controller-kind-v1.9.5.yml
+	kubectl apply -f ingress/nginx-controller-kind-v1.9.6.yml
 
 rm-nginx-kind:
-	kubectl delete -f ingress/nginx-controller-kind-v1.9.5.yml
+	kubectl delete -f ingress/nginx-controller-kind-v1.9.6.yml
 
 metrics-server:
 	helm upgrade --install --set 'args={--kubelet-insecure-tls}' \

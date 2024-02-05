@@ -178,10 +178,10 @@ rm-nginx-helm:
 	helm delete ingress-nginx -n ingress-nginx
 
 nginx:
-	kubectl apply -f ./clusters/nginx-controller-v1.9.5.yml
+	kubectl apply -f ./clusters/nginx-controller-v1.9.6.yml
 
 rm-nginx:
-	-kubectl delete -f ./clusters/nginx-controller-v1.9.5.yml
+	-kubectl delete -f ./clusters/nginx-controller-v1.9.6.yml
 
 apps-ingress:
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/apps.yml
