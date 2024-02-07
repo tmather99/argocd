@@ -29,6 +29,8 @@ spec:
               containerPort: 4318
             - name: otel-grpc
               containerPort: 4317
+            - name: otel-collector
+              containerPort: 8888
             - name: prom-metrics
               containerPort: 8889
           volumeMounts:
@@ -60,6 +62,10 @@ spec:
       port: 4317
       protocol: TCP
       targetPort: 4317
+    - name: otel-collector
+      port: 8888
+      protocol: TCP
+      targetPort: otel-collector
     - name: prom-metrics
       port: 8889
       protocol: TCP
