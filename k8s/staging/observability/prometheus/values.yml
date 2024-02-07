@@ -1,3 +1,9 @@
+remote_write:
+- url: https://prometheus-prod-36-prod-us-west-0.grafana.net/api/prom/push
+  basic_auth:
+    username: 1405825
+    password: glc_eyJvIjoiMTA0NDc2NCIsIm4iOiJzdGFjay04NDc0OTgtaG0tcmVhZC1yZW1vdGUtd3JpdGUiLCJrIjoiNTcwOFdZVXlHSEIzWVQxSDEyMGo2TXVPIiwibSI6eyJyIjoicHJvZC11cy13ZXN0LTAifX0=
+   
 extraScrapeConfigs: |
   - job_name: 'blackbox'
     metrics_path: /probe
