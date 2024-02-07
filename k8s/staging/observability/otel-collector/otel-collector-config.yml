@@ -44,7 +44,6 @@ data:
           grpc:
           http:
 
-      # Collect own metrics
       prometheus:
         config:
           scrape_configs:
@@ -53,6 +52,11 @@ data:
             scrape_interval: 10s
             static_configs:
             - targets: ['0.0.0.0:8888']
+
+          - job_name: aggregated-trace-metrics
+            scrape_interval: 10s
+            static_configs:
+              - targets: ['otel-collector-service.observability.svc.cluster.local:8889']
 
           - job_name: 'gru'
             scrape_interval: 10s
@@ -72,12 +76,16 @@ data:
           - job_name: 'anchorservice'
             scrape_interval: 10s
             static_configs:
-            - targets: ['anchorservice-service.default.svc.cluster.local']
+            - targets: ['anchorservice-service.default.svc.cluster.local',
+                        'anchorservice-service.default.svc.cluster.local:9464'
+                       ]
 
           - job_name: 'enrollmentservice'
             scrape_interval: 10s
             static_configs:
-            - targets: ['enrollmentservice-service.default.svc.cluster.local']
+            - targets: ['enrollmentservice-service.default.svc.cluster.local',
+                        'enrollmentservice-service.default.svc.cluster.local:9464'
+                       ]
 
     processors:
       batch:
