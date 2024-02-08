@@ -24,7 +24,7 @@ iam:
  
 addons:
 - name: aws-ebs-csi-driver
-  version: v1.26.1-eksbuild.1
+  version: v1.27.0-eksbuild.1
   attachPolicyARNs:
   - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
  
