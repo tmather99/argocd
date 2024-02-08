@@ -53,11 +53,6 @@ data:
             static_configs:
             - targets: ['0.0.0.0:8888']
 
-          - job_name: aggregated-trace-metrics
-            scrape_interval: 10s
-            static_configs:
-              - targets: ['otel-collector-service.observability.svc.cluster.local:8889']
-
           - job_name: 'gru'
             scrape_interval: 10s
             static_configs:
@@ -76,16 +71,12 @@ data:
           - job_name: 'anchorservice'
             scrape_interval: 10s
             static_configs:
-            - targets: ['anchorservice-service.default.svc.cluster.local',
-                        'anchorservice-service.default.svc.cluster.local:9464'
-                       ]
+            - targets: ['anchorservice-service.default.svc.cluster.local']
 
           - job_name: 'enrollmentservice'
             scrape_interval: 10s
             static_configs:
-            - targets: ['enrollmentservice-service.default.svc.cluster.local',
-                        'enrollmentservice-service.default.svc.cluster.local:9464'
-                       ]
+            - targets: ['enrollmentservice-service.default.svc.cluster.local']
 
     processors:
       batch:
