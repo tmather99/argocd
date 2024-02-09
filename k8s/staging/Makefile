@@ -470,7 +470,7 @@ rm-testbed: use-context \
 	rm-authminion \
 	rm-gru \
 	rm-macminion \
-	webapp-1
+	rm-webapp-1
 
 #
 # ImageGallery targets
