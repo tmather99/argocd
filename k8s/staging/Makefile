@@ -86,6 +86,7 @@ tls-secrets:
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
+	kubectl apply -f ./clusters/$(PROJ)/tls-secrets/webclient-tls.yml
  
 rm-tls-secrets: 
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/dapr-system-tls.yml
@@ -97,6 +98,7 @@ rm-tls-secrets:
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/macminion-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/authminion-tls.yml
 	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/webapp-1-tls.yml
+	-kubectl delete -f ./clusters/$(PROJ)/tls-secrets/webclient-tls.yml
 
 #
 # ASPNETCORE_Kestrel__Certificates__Default
@@ -267,6 +269,12 @@ webapp-1-ingress:
 rm-webapp-1-ingress:	
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webapp-1.yml
 
+webclient-ingress:	
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webclient.yml
+
+rm-webclient-ingress:	
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webclient.yml
+
 otel-demo-ingress:	
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/otel-demo.yml
 
@@ -282,6 +290,7 @@ ingress: use-context dapr-dashboard-ingress
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/authminion.yml
 	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webapp-1.yml
+	kubectl apply -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webclient.yml
 
 rm-ingress: use-context rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/grafana.yml
@@ -292,6 +301,7 @@ rm-ingress: use-context rm-dapr-dashboard-ingress
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/macminion.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/authminion.yml
 	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webapp-1.yml
+	-kubectl delete -f ./clusters/$(PROJ)/$(INGRESS_TYPE)/webclient.yml
 
 # 
 # utils targets
@@ -460,11 +470,18 @@ webapp-1: use-context
 rm-webapp-1: use-context
 	-helm delete webapp-1
 
+webclient: use-context
+	helm install webclient apps/testbed/$(ENV)/$(PROJ)/webclient
+
+rm-webclient: use-context
+	-helm delete webclient
+
 testbed: use-context \
 	authminion \
 	gru \
 	macminion \
-	webapp-1
+	webapp-1 \
+	webclient
 
 rm-testbed: use-context \
 	rm-authminion \
@@ -664,6 +681,7 @@ CNAMES = \
 	macminion \
 	authminion \
 	webapp-1 \
+	webclient \
 	otel-demo \
 	signalr \
 	signalr-1 \
