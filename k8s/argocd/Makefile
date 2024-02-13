@@ -194,8 +194,8 @@ argocd-undeploy-testbed: use-context-argocd\
 	argocd-undeploy-authminion \
 	argocd-undeploy-gru \
 	argocd-undeploy-macminion \
-	argocd-deploy-webapp-1 \
-	argocd-deploy-webclient
+	argocd-undeploy-webapp-1 \
+	argocd-undeploy-webclient
 
 #
 # Argocd apps targets
