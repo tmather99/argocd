@@ -1,12 +1,13 @@
-appId: gru
+appId: macminion
 port: 80
 memory: "2048Mi"
 cpu: "1024m"  
 replicas: 1
 configmap:
-  name: gru-configmap-v1
+  name: macminion-configmap-v1
+idpUrl: "https://authminion-staging-testbed.assistdevtest.com"
 image:
-  name: projects.registry.vmware.com/jedi/gru
+  name: projects.registry.vmware.com/jedi/macminion
   tag: v240214_001
 
 OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"

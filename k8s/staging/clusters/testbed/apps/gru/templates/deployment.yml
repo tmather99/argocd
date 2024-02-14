@@ -39,6 +39,8 @@ spec:
             memory: {{ .Values.memory }}
             cpu: {{ .Values.cpu }}
         env:
+        - name: IDP_URL
+          value:  {{.Values.idpUrl}}
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
         - name: ASPNETCORE_URLS

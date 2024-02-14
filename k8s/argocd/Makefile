@@ -154,31 +154,31 @@ argocd-undeploy-utils: \
 	argocd-undeploy-redis-commander
 
 argocd-deploy-gru: use-context-argocd 
-	kubectl apply -f $(ENV)/$(PROJ)/testbed/gru.yml
+	kubectl apply -f $(ENV)/$(PROJ)/gru.yml
 
 argocd-undeploy-gru: use-context-argocd 
 	-kubectl delete app -n argocd gru-$(ENV)-$(PROJ)
 
 argocd-deploy-macminion: use-context-argocd 
-	kubectl apply -f $(ENV)/$(PROJ)/testbed/macminion.yml
+	kubectl apply -f $(ENV)/$(PROJ)/macminion.yml
 
 argocd-undeploy-macminion: use-context-argocd 
 	-kubectl delete app -n argocd macminion-$(ENV)-$(PROJ)
 
 argocd-deploy-authminion: use-context-argocd 
-	kubectl apply -f $(ENV)/$(PROJ)/testbed/authminion.yml
+	kubectl apply -f $(ENV)/$(PROJ)/authminion.yml
 
 argocd-undeploy-authminion: use-context-argocd 
 	-kubectl delete app -n argocd authminion-$(ENV)-$(PROJ)
 
 argocd-deploy-webapp-1: use-context-argocd 
-	kubectl apply -f $(ENV)/$(PROJ)/testbed/webapp-1.yml
+	kubectl apply -f $(ENV)/$(PROJ)/webapp-1.yml
 
 argocd-undeploy-webapp-1: use-context-argocd 
 	-kubectl delete app -n argocd webapp-1-$(ENV)-$(PROJ)
 
 argocd-deploy-webclient: use-context-argocd 
-	kubectl apply -f $(ENV)/$(PROJ)/testbed/webclient.yml
+	kubectl apply -f $(ENV)/$(PROJ)/webclient.yml
 
 argocd-undeploy-webclient: use-context-argocd 
 	-kubectl delete app -n argocd webclient-$(ENV)-$(PROJ)
