@@ -4,6 +4,7 @@ memory: "2048Mi"
 cpu: "1024m"  
 replicas: 1
 idpUrl: "https://authminion-staging-testbed.assistdevtest.com"
+GruUrl: "https://gru-staging-testbed.assistdevtest.com"
 configmap:
   name: webclient-configmap-v1
 image:
