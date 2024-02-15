@@ -58,3 +58,5 @@ spec:
             secretKeyRef:
               name: pfx-passwords
               key: assistdevtest-com-pfx-password
+        - name: ConnectionStrings__DataProtection
+          value: "jedi-staging-iris-redis.nsg6a7.ng.0001.apne1.cache.amazonaws.com:6379"

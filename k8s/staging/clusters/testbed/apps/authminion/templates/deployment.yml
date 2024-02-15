@@ -33,8 +33,6 @@ spec:
         - name: pfx-volume
           mountPath: /https
         ports:
-        - containerPort: 5001
-        - containerPort: 8080
         - containerPort: 8081
         resources:
           limits:
@@ -52,7 +50,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
         - name: ASPNETCORE_URLS
-          value: "http://+:8080;https://+:8081"        
+          value: "https://+:8081"        
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: {{ .Values.OTEL_EXPORTER_OTLP_ENDPOINT }}
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
