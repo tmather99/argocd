@@ -447,31 +447,31 @@ rm-apps: use-context \
 # ImageGallery targets
 #
 gru: use-context
-	helm install gru apps/testbed/gru
+	helm install gru ./clusters/$(PROJ)/apps/gru
 
 rm-gru: use-context
 	-helm delete gru
 
 macminion: use-context
-	helm install macminion apps/testbed/macminion
+	helm install macminion ./clusters/$(PROJ)/apps/macminion
 
 rm-macminion: use-context
 	-helm delete macminion
 
 authminion: use-context
-	helm install authminion apps/testbed/$(ENV)/$(PROJ)/authminion
+	helm install authminion ./clusters/$(PROJ)/apps/authminion
 
 rm-authminion: use-context
 	-helm delete authminion
 
 webapp-1: use-context
-	helm install webapp-1 apps/testbed/$(ENV)/$(PROJ)/webapp-1
+	helm install webapp-1 ./clusters/$(PROJ)/apps/webapp-1
 
 rm-webapp-1: use-context
 	-helm delete webapp-1
 
 webclient: use-context
-	helm install webclient apps/testbed/$(ENV)/$(PROJ)/webclient
+	helm install webclient ./clusters/$(PROJ)/apps/webclient
 
 rm-webclient: use-context
 	-helm delete webclient
@@ -487,7 +487,8 @@ rm-testbed: use-context \
 	rm-authminion \
 	rm-gru \
 	rm-macminion \
-	rm-webapp-1
+	rm-webapp-1 \
+	rm-webclient
 
 #
 # ImageGallery targets

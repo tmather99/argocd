@@ -1,5 +1,5 @@
 appId: webclient
-port: 80
+port: 543
 memory: "2048Mi"
 cpu: "1024m"  
 replicas: 1
@@ -9,7 +9,7 @@ configmap:
   name: webclient-configmap-v1
 image:
   name: projects.registry.vmware.com/jedi/webclient
-  tag: v240214_002
+  tag: v240214_005
 
 OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"
 OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"

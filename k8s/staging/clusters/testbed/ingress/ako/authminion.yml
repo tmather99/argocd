@@ -20,6 +20,6 @@ spec:
         backend:
           service:
             name: authminion-service
-            port:
-              name: https
+            port: 
+              number: 843  
               

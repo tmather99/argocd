@@ -14,8 +14,8 @@ spec:
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "{{ .Values.appId }}"
-        dapr.io/app-port: "8080"
-        dapr.io/app-ssl: "false"
+        dapr.io/app-port: "8081"
+        dapr.io/app-ssl: "true"
         dapr.io/config: "tracing"
         dapr.io/enable-metrics: "false"
         dapr.io/metrics-port: "9090" 
@@ -33,18 +33,18 @@ spec:
         - name: pfx-volume
           mountPath: /https
         ports:
-        - containerPort: 8080
+        - containerPort: 8081
         resources:
           limits:
             memory: {{ .Values.memory }}
             cpu: {{ .Values.cpu }}
         env:
         - name: IDP_URL
-          value:  {{.Values.idpUrl}}
+          value:  {{ .Values.idpUrl }}
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
         - name: ASPNETCORE_URLS
-          value: "http://+:8080"        
+          value: "https://+:8081"        
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: {{ .Values.OTEL_EXPORTER_OTLP_ENDPOINT }}
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
@@ -58,7 +58,3 @@ spec:
             secretKeyRef:
               name: pfx-passwords
               key: assistdevtest-com-pfx-password
-        - name: IdpServerUri
-          value: "https://idp.assistdevtest.com"
-        - name: ConnectionStrings__GlobomanticsDb
-          value: "Server=sql.assistdevtest.com;Database=Globomantics;User Id=sa;Password=AssistJedi2023;MultipleActiveResultSets=true;TrustServerCertificate=True"

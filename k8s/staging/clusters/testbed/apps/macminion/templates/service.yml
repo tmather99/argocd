@@ -7,6 +7,6 @@ spec:
     app: {{ .Values.appId }}-app 
   ports:
     - protocol: TCP 
-      port: 80
-      targetPort: 8080
+      port: {{ .Values.port }}
+      targetPort: 8081
   type: ClusterIP
