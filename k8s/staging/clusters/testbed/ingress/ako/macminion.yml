@@ -20,4 +20,4 @@ spec:
           service:
             name: macminion-service
             port: 
-              number: 643  
+              number: 443  

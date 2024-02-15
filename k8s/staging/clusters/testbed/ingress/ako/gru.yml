@@ -20,4 +20,4 @@ spec:
           service:
             name: gru-service
             port: 
-              number: 743  
+              number: 443  

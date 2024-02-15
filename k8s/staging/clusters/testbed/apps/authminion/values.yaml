@@ -1,5 +1,5 @@
 appId: authminion
-port: 843
+port: 443
 memory: "2048Mi"
 cpu: "1024m"  
 replicas: 1
