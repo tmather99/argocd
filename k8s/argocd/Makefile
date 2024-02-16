@@ -146,11 +146,9 @@ argocd-undeploy-redis-commander:
 	-kubectl delete app -n argocd redis-commander-$(ENV)-$(PROJ)
 
 argocd-deploy-utils: \
-	argocd-deploy-seq \
 	argocd-deploy-redis-commander
 
 argocd-undeploy-utils: \
-	argocd-undeploy-seq \
 	argocd-undeploy-redis-commander
 
 argocd-deploy-gru: use-context-argocd 
