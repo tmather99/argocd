@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: webclient-tls
+  namespace: default
+spec:
+  secretName: webclient-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - webclient-staging-yellow.assistdevtest.com

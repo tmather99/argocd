@@ -1,25 +1,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: authminion-ingress  
-  namespace: default
+  name: webclient-ingress  
   annotations:
     passthrough.ako.vmware.com/enabled: "true"
 spec:
   ingressClassName: avi-ingress-class
   tls:
   - hosts:
-      - authminion-staging-yellow.assistdevtest.com
-    secretName: authminion-tls
+      - webclient-staging-yellow.assistdevtest.com
+    secretName: webclient-tls   
   rules:
-  - host: authminion-staging-yellow.assistdevtest.com
+  - host: webclient-staging-yellow.assistdevtest.com
     http:
       paths:      
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: authminion-service
-            port:
+            name: webclient-service
+            port: 
               number: 443  
-              

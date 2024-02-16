@@ -1,16 +1,14 @@
-appId: authminion
+appId: webclient
 port: 443
 memory: "2048Mi"
 cpu: "1024m"  
 replicas: 1
 idpUrl: "https://authminion-staging-yellow.assistdevtest.com"
 GruUrl: "https://gru-staging-yellow.assistdevtest.com"
-MacMinionUrl: "https://macminion-staging-yellow.assistdevtest.com"
-WebClientUrl: "https://webclient-staging-yellow.assistdevtest.com"
 configmap:
-  name: authminion-configmap-v1
+  name: webclient-configmap-v1
 image:
-  name: projects.registry.vmware.com/jedi/authminion
+  name: projects.registry.vmware.com/jedi/webclient
   tag: v240215_008
 
 OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webclient-ingress  
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - webclient-staging-yellow.assistdevtest.com
+    secretName: webclient-tls   
+  rules:
+  - host: webclient-staging-yellow.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webclient-service
+            port: 
+              number: 80  

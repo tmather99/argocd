@@ -15,7 +15,7 @@ spec:
         dapr.io/enabled: "true"
         dapr.io/app-id: "{{ .Values.appId }}"
         dapr.io/app-port: "8081"
-        dapr.io/app-protocol: "https"
+        dapr.io/app-ssl: "true"
         dapr.io/config: "tracing"
         dapr.io/enable-metrics: "false"
         dapr.io/metrics-port: "9090" 
@@ -41,16 +41,10 @@ spec:
         env:
         - name: IDP_URL
           value:  {{ .Values.idpUrl }}
-        - name: Clients__GruUrl
-          value: {{ .Values.GruUrl }}
-        - name: Clients__MacMinionUrl
-          value: {{ .Values.MacMinionUrl }}
-        - name: Clients__WebClientUrl
-          value: {{ .Values.WebClientUrl }}
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
         - name: ASPNETCORE_URLS
-          value: "http://+:8080;https://+:8081"        
+          value: "https://+:8081"        
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: {{ .Values.OTEL_EXPORTER_OTLP_ENDPOINT }}
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
@@ -64,8 +58,5 @@ spec:
             secretKeyRef:
               name: pfx-passwords
               key: assistdevtest-com-pfx-password
-        - name: ConnectionStrings__IDP
-          value: "Server=sql.assistdevtest.com;Database=Authminion;User Id=sa;Password=AssistJedi2023;MultipleActiveResultSets=true;TrustServerCertificate=True"
         - name: ConnectionStrings__DataProtection
           value: "jedi-staging-iris-redis.nsg6a7.ng.0001.apne1.cache.amazonaws.com:6379"
-
