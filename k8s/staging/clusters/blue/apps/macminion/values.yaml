@@ -1,15 +1,15 @@
-appId: webapp-1
-port: 80
+appId: macminion
+port: 443
 memory: "2048Mi"
 cpu: "1024m"  
 replicas: 1
-idpUrl: "https://authminion-staging-blue.assistdevtest.com"
 configmap:
-  name: webapp-1-configmap-v1
+  name: macminion-configmap-v1
+idpUrl: "https://authminion-staging-blue.assistdevtest.com"
 image:
-  name: projects.registry.vmware.com/jedi/webapp-1
+  name: projects.registry.vmware.com/jedi/macminion
   tag: v240215_005
-  
+
 OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"
 OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
 OTEL_EXPORTER_OTLP_HEADERS:

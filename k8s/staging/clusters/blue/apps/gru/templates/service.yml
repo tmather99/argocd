@@ -5,9 +5,8 @@ metadata:
 spec:
   selector:
     app: {{ .Values.appId }}-app 
-  type: ClusterIP
   ports:
-    - name: idp-https
-      protocol: TCP      
+    - protocol: TCP 
       port: {{ .Values.port }}
       targetPort: 8081
+  type: ClusterIP

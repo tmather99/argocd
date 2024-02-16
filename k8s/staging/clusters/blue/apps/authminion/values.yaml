@@ -4,11 +4,14 @@ memory: "2048Mi"
 cpu: "1024m"  
 replicas: 1
 idpUrl: "https://authminion-staging-blue.assistdevtest.com"
+GruUrl: "https://gru-staging-blue.assistdevtest.com"
+MacMinionUrl: "https://macminion-staging-blue.assistdevtest.com"
+WebClientUrl: "https://webclient-staging-blue.assistdevtest.com"
 configmap:
   name: authminion-configmap-v1
 image:
   name: projects.registry.vmware.com/jedi/authminion
-  tag: v240128_001
+  tag: v240215_005
 
 OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"
 OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
