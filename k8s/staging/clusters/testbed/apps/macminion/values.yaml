@@ -8,7 +8,7 @@ configmap:
 idpUrl: "https://authminion-staging-testbed.assistdevtest.com"
 image:
   name: projects.registry.vmware.com/jedi/macminion
-  tag: v240215_005
+  tag: v240215_008
 
 OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"
 OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
