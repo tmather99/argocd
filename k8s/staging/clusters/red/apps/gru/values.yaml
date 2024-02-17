@@ -1,0 +1,15 @@
+appId: gru
+port: 443
+memory: "2048Mi"
+cpu: "1024m"  
+replicas: 1
+configmap:
+  name: gru-configmap-v1
+idpUrl: "https://authminion-staging-red.assistdevtest.com"
+image:
+  name: projects.registry.vmware.com/jedi/gru
+  tag: v240216_001
+
+OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"
+OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+OTEL_EXPORTER_OTLP_HEADERS:

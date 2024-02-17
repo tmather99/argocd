@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webclient-ingress  
+  annotations:
+    passthrough.ako.vmware.com/enabled: "true"
+spec:
+  ingressClassName: avi-ingress-class
+  tls:
+  - hosts:
+      - webclient-staging-classic.assistdevtest.com
+    secretName: webclient-tls   
+  rules:
+  - host: webclient-staging-classic.assistdevtest.com
+    http:
+      paths:      
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webclient-service
+            port: 
+              number: 443  

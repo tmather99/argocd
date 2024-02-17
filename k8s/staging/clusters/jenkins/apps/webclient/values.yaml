@@ -1,0 +1,16 @@
+appId: webclient
+port: 443
+memory: "2048Mi"
+cpu: "1024m"  
+replicas: 1
+idpUrl: "https://authminion-staging-jenkins.assistdevtest.com"
+GruUrl: "https://gru-staging-jenkins.assistdevtest.com"
+configmap:
+  name: webclient-configmap-v1
+image:
+  name: projects.registry.vmware.com/jedi/webclient
+  tag: v240216_001
+
+OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"
+OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+OTEL_EXPORTER_OTLP_HEADERS:
