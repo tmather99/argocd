@@ -8,22 +8,9 @@ spec:
   ingressClassName: avi-ingress-class
   tls:
   - hosts:
-      - seq-staging-testbed.assistdevtest.com
-    secretName: assistdevtest-com-tls   
-  - hosts:
       - redis-staging-testbed.assistdevtest.com
     secretName: assistdevtest-com-tls   
   rules:
-  - host: seq-staging-testbed.assistdevtest.com
-    http:
-      paths:      
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: seq-service
-            port: 
-              number: 80  
   - host: redis-staging-testbed.assistdevtest.com
     http:
       paths:      
