@@ -33,8 +33,6 @@ spec:
         - name: pfx-volume
           mountPath: /https
         ports:
-        - containerPort: 5001
-        - containerPort: 8080
         - containerPort: 8081
         resources:
           limits:
@@ -42,7 +40,13 @@ spec:
             cpu: {{ .Values.cpu }}
         env:
         - name: IDP_URL
-          value:  {{.Values.idpUrl}}
+          value:  {{ .Values.idpUrl }}
+        - name: Clients__GruUrl
+          value: {{ .Values.GruUrl }}
+        - name: Clients__MacMinionUrl
+          value: {{ .Values.MacMinionUrl }}
+        - name: Clients__WebClientUrl
+          value: {{ .Values.WebClientUrl }}
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"        
         - name: ASPNETCORE_URLS
