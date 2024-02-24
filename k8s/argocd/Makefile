@@ -100,7 +100,7 @@ argocd-add-project:
 argocd-add-cluster:
 	argocd cluster add cloudgate@tmather@jedi-$(ENV)-$(PROJ).$(REGION).eksctl.io --grpc-web -y
 
-argocd-connect-repo:
+argocd-add-repo:
 	argocd repo add $(GIT_REPO) --insecure-ignore-host-key
 
 argocd-add-oci-repo:
@@ -109,7 +109,7 @@ argocd-add-oci-repo:
 argocd-update-settings: \
 	argocd-login \
 	argocd-add-project \
-	argocd-connect-repo \
+	argocd-add-repo \
 	argocd-add-cluster
 
 #
