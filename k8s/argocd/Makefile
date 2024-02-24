@@ -106,7 +106,7 @@ argocd-connect-repo:
 argocd-add-oci-repo:
 	argocd repo add projects.registry.vmware.com:443/jedi --type helm --name oci-repo --enable-oci
 
-argocd-settings: \
+argocd-update-settings: \
 	argocd-login \
 	argocd-add-project \
 	argocd-connect-repo \
