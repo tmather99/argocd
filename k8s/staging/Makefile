@@ -688,10 +688,10 @@ CNAMES = \
 	signalr-1 \
 	signalr-2
 
-dns:
+dns: use-context
 	$(foreach CNAME, $(CNAMES),$(call update_dns_record,$(CNAME)-$(ENV)-$(PROJ),$(CNAME_VALUE),'UPSERT')&)
 
-rm-dns:
+rm-dns: use-context
 	$(foreach CNAME, $(CNAMES),$(call update_dns_record,$(CNAME)-$(ENV)-$(PROJ),$(CNAME_VALUE),'DELETE')&)
 
 SQL_CNAME_VALUE = `kubectl get service globosql-elb \
