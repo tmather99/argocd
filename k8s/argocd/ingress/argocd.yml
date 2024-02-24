@@ -21,7 +21,7 @@ spec:
         path: /
         backend:
           service:
-            name: argocd-argo-cd-server
+            name: argocd-server
             port:
               name: https
     

@@ -37,6 +37,7 @@ helm-repos:
 	-helm repo add jetstack https://charts.jetstack.io
 	-helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 	-helm repo add ckotzbauer https://ckotzbauer.github.io/helm-charts
+	-helm repo add argo https://argoproj.github.io/argo-helm
 	-helm repo update
 
 # https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
@@ -56,15 +57,17 @@ rm-metrics-server:
 #
 # argocd targets
 #
+# helm search repo argo/argo-cd --versions | more
+# helm show values argo/argo-cd > values.yml
 argocd-install: use-context-argocd argocd-ingress argocd-secrets
-	helm upgrade --install argocd -n argocd --create-namespace --version 5.9.0 \
-		oci://registry-1.docker.io/bitnamicharts/argo-cd --wait
+	helm upgrade --install argocd -n argocd --create-namespace --version 6.3.1 \
+		argo/argo-cd --values values.yml --wait
 
 argocd-uninstall:
 	helm delete argocd -n argocd
 
 argocd-password:
-	kubectl -n argocd get secret argocd-secret -o jsonpath="{.data.clearPassword}" | base64 -d && echo
+	kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
 
 # kubectl create secret tls assistdevops-tls --key="certs/privkey3.pem" --cert="certs/fullchain3.pem" --dry-run=client -o yaml
 argocd-secrets:
@@ -86,7 +89,7 @@ rm-argocd-ingress:
 # Argocd settings
 #
 argocd-update-password:
-	$(eval PWD := $(shell kubectl -n argocd get secret argocd-secret -o jsonpath="{.data.clearPassword}" | base64 -d))
+	$(eval PWD := $(shell kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d))
 	argocd login argocd.assistdevtest.com --username admin --password $(PWD) --grpc-web
 	argocd account update-password --account admin --current-password $(PWD) --new-password Assist@1 --server argocd.assistdevtest.com --grpc-web
 
