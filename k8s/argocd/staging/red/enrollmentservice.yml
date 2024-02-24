@@ -4,7 +4,7 @@ metadata:
   name: enrollmentservice-staging-red
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io  
+    - resources-finalizer.argocd.argoproj.io/background 
   labels:
     ENV: staging
 spec:

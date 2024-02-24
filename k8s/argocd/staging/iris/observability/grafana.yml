@@ -4,7 +4,7 @@ metadata:
   name: grafana-staging-iris
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io  
+    - resources-finalizer.argocd.argoproj.io/background 
   labels:
     ENV: staging
 spec:

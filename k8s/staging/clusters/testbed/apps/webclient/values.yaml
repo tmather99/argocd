@@ -1,6 +1,6 @@
 appId: webclient
 port: 443
-memory: "2048Mi"
+memory: "1024Mi"
 cpu: "1024m"  
 replicas: 1
 idpUrl: "https://authminion-staging-testbed.assistdevtest.com"
