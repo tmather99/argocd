@@ -57,7 +57,7 @@ rm-metrics-server:
 # argocd targets
 #
 argocd-install: use-context-argocd argocd-ingress argocd-secrets
-	helm upgrade --install argocd -n argocd --create-namespace --version 5.8.1 \
+	helm upgrade --install argocd -n argocd --create-namespace --version 5.9.0 \
 		oci://registry-1.docker.io/bitnamicharts/argo-cd --wait
 
 argocd-uninstall:
