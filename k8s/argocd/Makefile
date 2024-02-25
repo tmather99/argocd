@@ -67,7 +67,8 @@ argocd-uninstall:
 	helm delete argocd -n argocd
 
 argocd-password:
-	kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+	$(eval PWD := $(shell kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d))
+	@echo $(PWD)
 
 # kubectl create secret tls assistdevops-tls --key="certs/privkey3.pem" --cert="certs/fullchain3.pem" --dry-run=client -o yaml
 argocd-secrets:
@@ -88,8 +89,7 @@ rm-argocd-ingress:
 #
 # Argocd settings
 #
-argocd-update-password:
-	$(eval PWD := $(shell kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d))
+argocd-update-password: argocd-password
 	argocd login argocd.assistdevtest.com --username admin --password $(PWD) --grpc-web
 	argocd account update-password --account admin --current-password $(PWD) --new-password Assist@1 --server argocd.assistdevtest.com --grpc-web
 
