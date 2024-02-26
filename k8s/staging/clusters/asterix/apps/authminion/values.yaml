@@ -11,7 +11,7 @@ configmap:
   name: authminion-configmap-v1
 image:
   name: projects.registry.vmware.com/jedi/authminion
-  tag: v240222_001
+  tag: v240225_001
 
 OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector-service.observability.svc.cluster.local:4317"
 OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"

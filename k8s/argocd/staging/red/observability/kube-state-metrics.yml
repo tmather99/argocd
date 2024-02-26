@@ -11,7 +11,7 @@ spec:
   project: red
   source:
     repoURL: 'https://charts.bitnami.com/bitnami'
-    targetRevision: 3.10.1
+    targetRevision: 3.14.2
     chart: kube-state-metrics
     helm:
       releaseName: kube-state-metrics
