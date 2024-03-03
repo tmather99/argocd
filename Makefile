@@ -38,7 +38,13 @@ else
 REGION = ap-northeast-1
 endif
 
+ECR_REGION 		= 227368022383.dkr.ecr.$(REGION).amazonaws.com
+
+ecr-login:
+	aws ecr get-login-password --region $(REGION) | docker login --username AWS --password-stdin $(ECR_REGION)
+
 .PHONY: sql
+
 
 #
 # k8s cluster contexts
